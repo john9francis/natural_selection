@@ -42,6 +42,7 @@ class Creature:
 
 
   def draw(self, screen):
+    # draw basic white rect
     pygame.draw.rect(screen, (255, 255, 255), (self.pos.x, self.pos.y, self.size.x, self.size.y))
 
 

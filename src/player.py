@@ -14,7 +14,7 @@ class Player:
 
   def update(self, dt):
 
-    # make the players move
+    # make the player move
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
       self.pos.y -= 300 * dt
@@ -37,6 +37,7 @@ class Player:
 
 
   def draw(self, screen):
+    # Draw basic white rect
     pygame.draw.rect(screen, (255, 255, 255), (self.pos.x, self.pos.y, self.size.x, self.size.y))
 
 
