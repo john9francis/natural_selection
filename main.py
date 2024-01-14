@@ -90,8 +90,8 @@ while index < len(creature_list):
 
 # save the creature info
 sm.populate_creature_dict(creature_list)
-print(len(creature_list) + " creatures survived this run.")
 sm.save()
+print(f"{len(creature_list)} creatures survived this run.")
 
 print("Quitting...")
 pygame.quit()
