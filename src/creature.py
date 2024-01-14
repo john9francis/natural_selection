@@ -13,9 +13,11 @@ class Creature:
   instructions = ["LEFT", "PAUSE", "RIGHT", "PAUSE"]
   instr_i = 0
 
-  def __init__(self, start_pos):
+  def __init__(self, start_pos, instruction_list=None):
     self.pos = start_pos
-    pass
+    if instruction_list != None:
+      self.instructions = instruction_list
+    
 
   def update(self, dt):
     if self.instructions[self.instr_i] == "LEFT":
@@ -46,4 +48,19 @@ class Creature:
     pygame.draw.rect(screen, (255, 255, 255), (self.pos.x, self.pos.y, self.size.x, self.size.y))
 
 
+  def get_instructions(self):
+    return self.instructions
 
+  def set_instructions(self, ins):
+    self.instructions = ins
+
+  def mutate(self):
+    choice = random.random()
+    if choice >= .1:
+      self.instructions.append("LEFT")
+    elif .1 >= choice > .2:
+      self.instructions.append("RIGHT")
+    elif .2 >= choice > .3:
+      self.instructions.append("PAUSE")
+    elif .3 >= choice > .4:
+      self.instructions.pop(0)
