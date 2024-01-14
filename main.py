@@ -1,5 +1,7 @@
 import pygame
 
+from src import creature
+
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
@@ -12,6 +14,8 @@ player_size = pygame.Vector2(50, 50)
 running = True
 
 
+# initialize a creature
+c = creature.Creature()
 
 while running:
   for event in pygame.event.get():
@@ -46,7 +50,9 @@ while running:
   if player_pos.y < 0:
     player_pos.y = 0
      
-
+  # update our creatures
+  c.update(dt)
+  c.draw(screen)
 
   # this line draws to the window
   pygame.display.flip()
