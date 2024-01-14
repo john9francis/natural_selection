@@ -12,6 +12,7 @@ class SaveManager:
     counter = 0
     for c in creature_list:
       self.creature_dict[counter] = c.get_instructions()
+      counter += 1
     pass
 
   def get_creature_dict(self):
