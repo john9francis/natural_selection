@@ -3,8 +3,8 @@ import pygame
 class Creature:
 
   pos = pygame.Vector2(500, 50)
-  size = pygame.Vector2(50, 50)
-  speed = 300
+  size = pygame.Vector2(5, 5)
+  speed = 100
 
   start_time = pygame.time.get_ticks()
   time_interval = 200
