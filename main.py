@@ -27,13 +27,25 @@ while running:
   # make the player move:
   keys = pygame.key.get_pressed()
   if keys[pygame.K_w]:
-      player_pos.y -= 300 * dt
+    player_pos.y -= 300 * dt
   if keys[pygame.K_s]:
-      player_pos.y += 300 * dt
+    player_pos.y += 300 * dt
   if keys[pygame.K_a]:
-      player_pos.x -= 300 * dt
+    player_pos.x -= 300 * dt
   if keys[pygame.K_d]:
-      player_pos.x += 300 * dt
+    player_pos.x += 300 * dt
+
+
+  # keep player on the screen
+  if player_pos.x > screen.get_width() - player_size.x:
+    player_pos.x = screen.get_width() - player_size.x
+  if player_pos.x < 0:
+    player_pos.x = 0
+  if player_pos.y > screen.get_height() - player_size.y:
+    player_pos.y = screen.get_height() - player_size.y
+  if player_pos.y < 0:
+    player_pos.y = 0
+     
 
 
   # this line draws to the window
