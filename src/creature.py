@@ -1,4 +1,5 @@
 import pygame
+import random
 
 class Creature:
 
@@ -37,9 +38,7 @@ class Creature:
     if elapsed_time >= self.time_interval:
       self.start_time = current_time
 
-      self.instr_i += 1
-      if self.instr_i > len(self.instructions) - 1:
-        self.instr_i = 0
+      self.instr_i = random.randint(0, len(self.instructions) - 1)
 
 
   def draw(self, screen):
