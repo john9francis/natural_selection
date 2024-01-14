@@ -1,4 +1,3 @@
-from numpy import insert
 import pygame
 
 class Creature:
@@ -8,7 +7,7 @@ class Creature:
   speed = 300
 
   start_time = pygame.time.get_ticks()
-  time_interval = 2000
+  time_interval = 200
 
   instructions = ["LEFT", "PAUSE", "RIGHT", "PAUSE"]
   instr_i = 0
