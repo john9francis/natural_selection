@@ -10,7 +10,7 @@ class Creature:
   start_time = pygame.time.get_ticks()
   time_interval = 200
 
-  instructions = ["LEFT", "PAUSE", "RIGHT", "PAUSE"]
+  instructions = ["LEFT", "PAUSE", "RIGHT"]
   instr_i = 0
 
   def __init__(self, start_pos, instruction_list=None):
@@ -56,11 +56,9 @@ class Creature:
 
   def mutate(self):
     choice = random.random()
-    if choice >= .1:
-      self.instructions.append("LEFT")
-    elif .1 >= choice > .2:
-      self.instructions.append("RIGHT")
-    elif .2 >= choice > .3:
-      self.instructions.append("PAUSE")
-    elif .3 >= choice > .4:
-      self.instructions.pop(0)
+    if choice > .3:
+      # duplicate a random instruction
+      self.instructions.append(random.choice(self.instructions))
+    elif .3 >= choice > .7:
+      # remove a random instruction
+      self.instructions.pop(random.randint(0, len(self.instruction_list) - 1))
