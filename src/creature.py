@@ -12,7 +12,8 @@ class Creature:
   instructions = ["LEFT", "PAUSE", "RIGHT", "PAUSE"]
   instr_i = 0
 
-  def __init__(self):
+  def __init__(self, start_pos):
+    self.pos = start_pos
     pass
 
   def update(self, dt):

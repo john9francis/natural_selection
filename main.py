@@ -1,4 +1,5 @@
 import pygame
+import random
 
 from src import creature
 from src import player
@@ -15,9 +16,13 @@ running = True
 
 # initialize our creatures
 creature_list = []
-
-c = creature.Creature()
-creature_list.append(c)
+for i in range(100):
+  c = creature.Creature(
+    pygame.Vector2(
+      random.random() * screen.get_width(), 
+      random.random() * screen.get_height())
+    )
+  creature_list.append(c)
 
 p = player.Player(screen)
 creature_list.append(p)
