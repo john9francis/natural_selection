@@ -5,10 +5,11 @@ class Genome:
   # 0: input address
   # 1: output address
   # 2: strength of connection between them 
-  genome = [0., 0., 0.]
+  genome = None
 
 
   def __init__(self) -> None:
+    self.genome = [0., 0., 0.]
     pass
 
   def get_genome(self):
