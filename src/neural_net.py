@@ -6,9 +6,12 @@ class NeuralNet:
   genomes = []
 
   def __init__(self) -> None:
-    self.genomes = [genome.Genome() for i in range(10)]
+    for i in range(10):
+      new_g = genome.Genome()
+      new_g.mutate()
+      self.genomes.append(new_g)
+
     for g in self.genomes:
-      g.mutate
       g.print_genome()
     pass
 
