@@ -1,6 +1,8 @@
 import pygame
 import random
 
+from . import neural_net
+
 class Creature:
 
   pos = pygame.Vector2(500, 50)
@@ -13,10 +15,14 @@ class Creature:
   instructions = ["LEFT", "PAUSE", "RIGHT"]
   instr_i = 0
 
+  nn = None
+
   def __init__(self, start_pos, instruction_list=None):
     self.pos = start_pos
     if instruction_list != None:
       self.instructions = instruction_list
+
+    self.nn = neural_net.NeuralNet()
     
 
   def update(self, dt):
