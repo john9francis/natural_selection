@@ -1,15 +1,4 @@
-class Output:
-  # makes the creature do something
-  creature = None
-
-  def __init__(self, creature) -> None:
-    self.creature = creature
-    pass
-
-  def trigger_output(self):
-    raise NotImplementedError("Output children class must implement 'trigger_output' method.")
-
-
+from base_input_output import Output
 
 class MoveLeft(Output):
   def trigger_output(self):

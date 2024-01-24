@@ -1,18 +1,5 @@
 import pygame
-
-class Input:
-  creature = None
-
-  # gets connected to an output function
-  def __init__(self, creature) -> None:
-    self.creature = creature
-    pass
-
-  def check_input(self) -> bool:
-    # this is a virtual function.
-    # all children need to make this function return a bool.
-    raise NotImplementedError("Input child class must impliment 'check_input' method.")
-
+from base_input_output import Input
 
 class Periodic_Activation(Input):
   start_time = None
