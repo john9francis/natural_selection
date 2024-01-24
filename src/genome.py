@@ -9,7 +9,7 @@ class Genome:
 
 
   def __init__(self) -> None:
-    self.genome = [0., 0., 0.]
+    self.genome = [0., 0., 1.]
     pass
 
   def get_genome(self):

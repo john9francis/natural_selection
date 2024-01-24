@@ -1,5 +1,6 @@
 from . import genome
 import pygame
+import random
 from . import class_finder
 
 class NeuralNet:
@@ -12,6 +13,8 @@ class NeuralNet:
   input_filepath = 'src/inputs.py'
   output_filepath = 'src/outputs.py'
 
+  # instructions dict format:
+  # input_function: [output_function, weight]
   instructions = {}
 
   start_time = pygame.time.get_ticks()
@@ -29,10 +32,16 @@ class NeuralNet:
 
 
   def update(self, dt):
+
     for key in self.input_output_dict:
+
       # check if one is true, and if so, do what it's connected to.
       if key.check_input():
-        self.input_output_dict[key].trigger_output()
+
+        # check if a random float is less than weight
+        weight = self.input_output_dict[key][1]
+        if random.random() < weight:
+          self.input_output_dict[key][0].trigger_output()
 
 
 
@@ -82,8 +91,9 @@ class NeuralNet:
       output = len(self.outputs) * g.get_genome()[1]
       output_indx = int(round(output)) - 1
 
+      # get the weight
+      weight = g.get_genome()[2]
+
       # Now add these to the dict
-      for i in range(len(self.inputs)):
-        print(i)
-      self.input_output_dict[self.inputs[input_indx]] = self.outputs[output_indx]
+      self.input_output_dict[self.inputs[input_indx]] = [self.outputs[output_indx], weight]
     pass
