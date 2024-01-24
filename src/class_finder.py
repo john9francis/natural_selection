@@ -4,19 +4,19 @@ import inspect
 import importlib.util
 
 def get_classes_from_file(file_path):
-    classes = []
+  classes = []
 
-    # Load the module from the file
-    spec = importlib.util.spec_from_file_location("module_from_file", file_path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+  # Load the module from the file
+  spec = importlib.util.spec_from_file_location("module_from_file", file_path)
+  module = importlib.util.module_from_spec(spec)
+  spec.loader.exec_module(module)
 
-    # Iterate through members of the module
-    for name, obj in inspect.getmembers(module):
-        if inspect.isclass(obj):
-            classes.append(obj)
+  # Iterate through members of the module
+  for name, obj in inspect.getmembers(module):
+      if inspect.isclass(obj):
+          classes.append(obj)
 
-    return classes
+  return classes
 
 # Example usage
 file_path = "src/test_classes_functions.py"
