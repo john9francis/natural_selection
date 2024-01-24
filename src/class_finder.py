@@ -13,8 +13,8 @@ def get_classes_from_file(file_path):
 
   # Iterate through members of the module
   for name, obj in inspect.getmembers(module):
-      if inspect.isclass(obj):
-          classes.append(obj)
+    if inspect.isclass(obj):
+      classes.append(obj)
 
   return classes
 
