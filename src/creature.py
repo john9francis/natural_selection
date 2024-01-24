@@ -23,20 +23,11 @@ class Creature:
       self.instructions = instruction_list
 
     self.nn = neural_net.NeuralNet()
+    self.nn.create_neural_net(self)
     
 
   def update(self, dt):
-    if self.instructions[self.instr_i] == "LEFT":
-      self.pos.x -= self.speed * dt
-      # move left
-      pass
-    if self.instructions[self.instr_i] == "RIGHT":
-      self.pos.x += self.speed * dt
-      # move right
-      pass
-    if self.instructions[self.instr_i] == "PAUSE":
-      # pause
-      pass
+    self.nn.update(dt)
 
     # Calculate elapsed time
     current_time = pygame.time.get_ticks()

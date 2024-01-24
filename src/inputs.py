@@ -1,7 +1,9 @@
-import pygame
-from base_input_output import Input
+# NOTE: Everything in this file should be a child class of Input.
 
-class Periodic_Activation(Input):
+import pygame
+from src import base_input_output
+
+class Periodic_Activation(base_input_output.Input):
   start_time = None
   time_interval = None
 

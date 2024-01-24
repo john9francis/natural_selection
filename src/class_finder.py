@@ -14,17 +14,18 @@ def get_classes_from_file(file_path):
   # Iterate through members of the module
   for name, obj in inspect.getmembers(module):
     if inspect.isclass(obj):
-      classes.append(obj)
+      classes.append(obj) # NOTE: returns the class but un-initialized
 
   return classes
 
 # Example usage
-file_path = "src/test_classes_functions.py"
-class_list = get_classes_from_file(file_path)
+if __name__ == "__main__":
+  file_path = "src/test_classes_functions.py"
+  class_list = get_classes_from_file(file_path)
 
-# Now class_list contains all the classes defined in the specified file
-print(class_list)
-for i in class_list:
-  i.print_stuff()
+  # Now class_list contains all the classes defined in the specified file
+  print(class_list)
+  for i in class_list:
+    i.print_stuff()
 
 
