@@ -25,6 +25,8 @@ for i in range(creature_amount):
       random.random() * screen.get_width(), 
       random.random() * screen.get_height()),
     )
+  
+  c.set_screen(screen)
   # mutate them
   c.mutate()
   creature_list.append(c)
@@ -49,6 +51,7 @@ while running:
   # update the screen
   pygame.display.flip()
   dt = clock.tick(60) / 1000
+
 
 # kill all creatures to the left of the screen
 index = 0

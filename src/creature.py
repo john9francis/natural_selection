@@ -4,6 +4,7 @@ import random
 from . import neural_net
 
 class Creature:
+  _screen = None
 
   pos = pygame.Vector2(500, 50)
   size = pygame.Vector2(5, 5)
@@ -20,6 +21,7 @@ class Creature:
 
   def update(self, dt):
     self.nn.update(dt)
+    self.stay_on_screen()
 
 
   def draw(self, screen):
@@ -27,4 +29,21 @@ class Creature:
     pygame.draw.rect(screen, (255, 255, 255), (self.pos.x, self.pos.y, self.size.x, self.size.y))
 
   def mutate(self):
+    pass
+
+
+  def stay_on_screen(self):
+    if self._screen != None:
+      if self.pos.x < 0:
+        self.pos.x = 0
+      if self.pos.x > self._screen.get_width() - self.size.x:
+        self.pos.x = self._screen.get_width() - self.size.x
+      if self.pos.y < 0:
+        self.pos.y = 0
+      if self.pos.y > self._screen.get_height() - self.size.y:
+        self.pos.y = self._screen.get_height() - self.size.y
+    pass
+
+  def set_screen(self, screen):
+    self._screen = screen
     pass
