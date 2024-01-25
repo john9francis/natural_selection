@@ -21,13 +21,7 @@ class NeuralNet:
   time_interval = 200
 
   def __init__(self) -> None:
-    for i in range(10):
-
-      # get some random genomes
-      # NOTE: Later these will be loaded from a JSON
-      new_g = genome.Genome()
-      new_g.mutate()
-      self.genomes.append(new_g)
+    pass
 
 
   def add_genome(self, genome):
@@ -62,6 +56,9 @@ class NeuralNet:
 
     # finially, populate the dict.
     self.populate_input_output_dict()
+
+    for key in self.input_output_dict:
+      print(f"{key}, {self.input_output_dict[key]} \n")
     
 
   def initialize_inputs_outputs(self, creature):

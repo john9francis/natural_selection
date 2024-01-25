@@ -21,6 +21,7 @@ class Creature:
   
     self.nn = neural_net.NeuralNet()
     self.nn.create_neural_net(self)
+    print("creature initialized")
     
 
   def update(self, dt):
