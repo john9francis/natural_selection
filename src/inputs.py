@@ -1,6 +1,7 @@
 # NOTE: Everything in this file should be a child class of Input.
 
 import pygame
+import random
 from src import base_input_output
 
 class Periodic_Activation(base_input_output.Input):
@@ -12,6 +13,8 @@ class Periodic_Activation(base_input_output.Input):
 
     self.start_time = pygame.time.get_ticks()
     self.time_interval = 200
+    # add a random amount to time interval to mix it up
+    self.time_interval += random.randint(0, 100)
 
   def check_input(self) -> bool:
     # Calculate elapsed time

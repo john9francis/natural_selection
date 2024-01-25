@@ -30,9 +30,16 @@ class NeuralNet:
       self.genomes.append(new_g)
 
 
+  def add_genome(self, genome):
+    self.genomes.append(genome)
+
+  def get_genome_list(self):
+    return self.genomes
+  
+  def set_genome_list(self, genome_list):
+    self.genomes = genome_list
 
   def update(self, dt):
-
     for key in self.input_output_dict:
 
       # check if one is true, and if so, do what it's connected to.
@@ -75,6 +82,7 @@ class NeuralNet:
     self.inputs = class_finder.get_classes_from_file(self.input_filepath)
     self.outputs = class_finder.get_classes_from_file(self.output_filepath)
     pass
+
 
   def populate_input_output_dict(self):
     # based on the genomes, link up inputs to outputs. 

@@ -17,7 +17,7 @@ running = True
 creature_amount = 10
 
 
-# initialize our creatures
+# initialize our creatures if no json file
 creature_list = []
 for i in range(creature_amount):
   c = creature.Creature(
@@ -26,9 +26,13 @@ for i in range(creature_amount):
       random.random() * screen.get_height()),
     )
   
+  # set the screen so they don't fall off of it
   c.set_screen(screen)
-  # mutate them
-  c.mutate()
+
+  # create their genomes at random
+  c.set_random_genomes()
+
+  # add them to creature list
   creature_list.append(c)
 
 

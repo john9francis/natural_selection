@@ -16,14 +16,17 @@ class Genome:
     return self.genome
 
   def set_genome(self, new_genome):
-    genome = new_genome
+    self.genome = new_genome
     pass
+
+  def set_random_genome(self):
+    self.genome = [random.random(), random.random(), random.random()]
 
   def print_genome(self):
     print(self.genome)
 
   def mutate(self):
-    # simply adds a random float to our genome
+    # randomly changes one of the floats
     indx = random.randint(0, len(self.genome)-1)
     self.genome[indx] = random.random()
     pass

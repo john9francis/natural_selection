@@ -1,6 +1,8 @@
 import pygame
 import random
 
+from . import genome
+
 from . import neural_net
 
 class Creature:
@@ -9,6 +11,8 @@ class Creature:
   pos = pygame.Vector2(500, 50)
   size = pygame.Vector2(5, 5)
   speed = 100
+
+  genome_amount = 10
 
   nn = None
 
@@ -47,3 +51,16 @@ class Creature:
   def set_screen(self, screen):
     self._screen = screen
     pass
+
+  def set_random_genomes(self):
+    for i in range(self.genome_amount):
+      g = genome.Genome()
+      g.set_random_genome()
+      self.nn.add_genome(g)
+    pass
+
+  def set_genomes(self, genome_list):
+    self.nn.set_genome_list(genome_list)
+
+  def get_genomes(self):
+    return self.nn.get_genome_list()
