@@ -34,6 +34,30 @@ class NeuralNet:
     self.genomes = genome_list
 
   def update(self, dt):
+
+    rand_val = random.random()
+
+    for genome_object in self.genomes:
+      g = genome_object.get_genome()
+
+      # stop here if the weight isn't as much as our random val
+      if g[2] < rand_val:
+        break
+
+      # otherwise, do the input and it's output function
+      input_indx = round(g[0] * (len(self.inputs) - 1))
+      output_indx = round(g[1] * (len(self.outputs) - 1))
+
+      input_class = self.inputs[input_indx]
+      output_class = self.outputs[output_indx]
+
+      if (input_class.check_input()):
+        output_class.trigger_output()
+
+
+    
+
+    '''
     for key in self.input_output_dict:
 
       # check if one is true, and if so, do what it's connected to.
@@ -43,6 +67,7 @@ class NeuralNet:
         weight = self.input_output_dict[key][1]
         if random.random() < weight:
           self.input_output_dict[key][0].trigger_output()
+    '''
 
 
 
@@ -51,14 +76,9 @@ class NeuralNet:
     # first, get all our maps populated
     self.populate_maps()
 
-    # then, initialize every input
+    # then, initialize every class with the creature
     self.initialize_inputs_outputs(creature)
 
-    # finially, populate the dict.
-    self.populate_input_output_dict()
-
-    for key in self.input_output_dict:
-      print(f"{key}, {self.input_output_dict[key]} \n")
     
 
   def initialize_inputs_outputs(self, creature):

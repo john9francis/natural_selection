@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 dt = 0
 running = True
 
-creature_amount = 3
+creature_amount = 1
 
 
 # initialize our creatures if no json file
