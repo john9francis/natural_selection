@@ -36,6 +36,7 @@ class NeuralNet:
   def update(self, dt):
 
     rand_val = random.random()
+    
 
     for genome_object in self.genomes:
       g = genome_object.get_genome()
@@ -51,8 +52,22 @@ class NeuralNet:
       input_class = self.inputs[input_indx]
       output_class = self.outputs[output_indx]
 
-      if (input_class.check_input()):
-        output_class.trigger_output()
+      print(f"first output class: {output_class}")
+
+      if (self.inputs[input_indx].check_input()):
+        '''
+        if output_indx == 0:
+          self.outputs[0].trigger_output()
+          print(f"triggered: {self.outputs[0]}")
+          pass
+        if output_indx == 1:
+          self.outputs[1].trigger_output()
+          print(f"triggered: {self.outputs[1]}")
+          pass
+        else:
+        '''
+        self.outputs[output_indx].trigger_output()
+        print(f"triggering {output_class}")
 
 
     
