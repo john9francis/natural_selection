@@ -1,5 +1,8 @@
 # testing the classes and functions for the class_finder
 
+from winreg import HKEY_LOCAL_MACHINE
+
+
 class TestBase:
   def __init__(self) -> None:
     pass
@@ -29,3 +32,16 @@ def print2():
 
 def print3():
   print("f3")
+
+
+# testing functions in a list
+
+def hello():
+  print("Hello")
+
+test_func_list = [
+  hello
+]
+
+for i in test_func_list:
+  i()

@@ -4,8 +4,8 @@ import random
 from . import class_finder
 
 class NeuralNet:
-  inputs = []
-  outputs = []
+  creature = None
+
   genomes = []
 
   input_output_dict = {}
@@ -38,36 +38,20 @@ class NeuralNet:
     rand_val = random.random()
     
 
-    for genome_object in self.genomes:
-      g = genome_object.get_genome()
+    # get a random genome
+    genome_object = random.choice(self.genomes)
+    g = genome_object.get_genome()
 
-      # stop here if the weight isn't as much as our random val
-      if g[2] < rand_val:
-        break
+    # only continue if the weight is bigger than our random val
+    if g[2] > rand_val:
 
-      # otherwise, do the input and it's output function
+      # do the input and it's output function
       input_indx = round(g[0] * (len(self.inputs) - 1))
       output_indx = round(g[1] * (len(self.outputs) - 1))
 
-      input_class = self.inputs[input_indx]
-      output_class = self.outputs[output_indx]
 
-      print(f"first output class: {output_class}")
-
-      if (self.inputs[input_indx].check_input()):
-        '''
-        if output_indx == 0:
-          self.outputs[0].trigger_output()
-          print(f"triggered: {self.outputs[0]}")
-          pass
-        if output_indx == 1:
-          self.outputs[1].trigger_output()
-          print(f"triggered: {self.outputs[1]}")
-          pass
-        else:
-        '''
-        self.outputs[output_indx].trigger_output()
-        print(f"triggering {output_class}")
+      if (self.inputs[input_indx](self)):
+        self.outputs[output_indx](self)
 
 
     
@@ -88,11 +72,14 @@ class NeuralNet:
 
   def create_neural_net(self, creature):
     ''' initializer for this neural net.'''
+    self.creature = creature
+
     # first, get all our maps populated
-    self.populate_maps()
+    #self.populate_maps()
 
     # then, initialize every class with the creature
-    self.initialize_inputs_outputs(creature)
+    #self.initialize_inputs_outputs(creature)
+    pass
 
     
 
@@ -137,3 +124,45 @@ class NeuralNet:
       # Now add these to the dict
       self.input_output_dict[self.inputs[input_indx]] = [self.outputs[output_indx], weight]
     pass
+
+
+
+  # =======================================================================
+  # Inputs functions
+  # =======================================================================
+
+  start_time = 0
+
+  def periodic_activation(self) -> bool:
+    # Calculate elapsed time
+    current_time = pygame.time.get_ticks()
+    elapsed_time = current_time - self.start_time
+
+    # Check if 2 seconds have passed
+    if elapsed_time >= self.time_interval:
+      self.start_time = current_time
+      return True
+    else:
+      return False
+    
+  
+  inputs = [periodic_activation]
+
+  # =======================================================================
+  # Outputs functions
+  # =======================================================================
+
+  def move_left(self):
+    self.creature.pos.x -= 10
+
+  def move_right(self):
+    self.creature.pos.x += 10
+
+  def move_up(self):
+    self.creature.pos.y -= 10
+
+  def move_down(self):
+    self.creature.pos.y += 10
+
+
+  outputs = [move_left, move_right, move_up, move_down]
