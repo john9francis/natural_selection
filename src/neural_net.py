@@ -1,6 +1,7 @@
 from . import genome
 import pygame
 import random
+import math
 from . import class_finder
 
 class NeuralNet:
@@ -35,21 +36,26 @@ class NeuralNet:
 
   def update(self, dt):
 
-    rand_val = random.random()
-    
-
     # get a random genome
     genome_object = random.choice(self.genomes)
     g = genome_object.get_genome()
 
     # only continue if the weight is bigger than our random val
-    if g[2] > rand_val:
+    if g[2] > random.random():
+
+      # get the indices by turning the floats into ints.
+      # note: we will randomly go floor or ceil to not be biased
+      if random.random() > .5:
+        input_indx = math.floor(g[0] * (len(self.inputs) - 1))
+      else:
+        input_indx = math.ceil(g[0] * (len(self.inputs) - 1))
+      if random.random() > .5:
+        output_indx = math.floor(g[0] * (len(self.outputs) - 1))
+      else:
+        output_indx = math.ceil(g[0] * (len(self.outputs) - 1))
+
 
       # do the input and it's output function
-      input_indx = round(g[0] * (len(self.inputs) - 1))
-      output_indx = round(g[1] * (len(self.outputs) - 1))
-
-
       if (self.inputs[input_indx](self)):
         self.outputs[output_indx](self)
 
