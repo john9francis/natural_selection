@@ -1,8 +1,5 @@
 import pygame
-import random
-
 from . import genome
-
 from . import neural_net
 
 class Creature:
@@ -18,10 +15,7 @@ class Creature:
 
   def __init__(self, start_pos):
     self.pos = start_pos
-  
-    self.nn = neural_net.NeuralNet()
-    self.nn.create_neural_net(self)
-    print("creature initialized")
+    self.nn = neural_net.NeuralNet(self)
     
 
   def update(self, dt):
@@ -32,6 +26,8 @@ class Creature:
   def draw(self, screen):
     # draw basic white rect
     pygame.draw.rect(screen, (255, 255, 255), (self.pos.x, self.pos.y, self.size.x, self.size.y))
+
+
 
   def mutate(self):
     pass
@@ -49,9 +45,11 @@ class Creature:
         self.pos.y = self._screen.get_height() - self.size.y
     pass
 
+
   def set_screen(self, screen):
     self._screen = screen
     pass
+
 
   def set_random_genomes(self):
     for i in range(self.genome_amount):
@@ -60,8 +58,10 @@ class Creature:
       self.nn.add_genome(g)
     pass
 
+
   def set_genomes(self, genome_list):
     self.nn.set_genome_list(genome_list)
+
 
   def get_genomes(self):
     return self.nn.get_genome_list()

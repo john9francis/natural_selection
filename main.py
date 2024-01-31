@@ -2,7 +2,6 @@ import pygame
 import random
 
 from src import creature
-from src import player
 from src import save_manager
 
 
@@ -60,8 +59,8 @@ while running:
 # kill all creatures to the left of the screen
 index = 0
 while index < len(creature_list):
-  if creature_list[index].pos.x < screen.get_width() / 2:
-    # creature on the left, kill them
+  if creature_list[index].pos.x > screen.get_width() / 2:
+    # creature on the right, kill them
     creature_list.pop(index)
   else:
     index += 1
