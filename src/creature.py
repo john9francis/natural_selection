@@ -65,3 +65,13 @@ class Creature:
 
   def get_genomes(self):
     return self.nn.get_genome_list()
+  
+
+  def get_raw_genome_list(self):
+    '''returns just a list of lists so it can be json serializable'''
+    raw_list = []
+    # get the genome data list
+    for g in self.nn.get_genome_list():
+      raw_list.append(g.get_genome())
+
+    return raw_list

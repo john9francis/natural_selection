@@ -1,3 +1,4 @@
+import enum
 import json
 
 class SaveManager:
@@ -6,13 +7,14 @@ class SaveManager:
   filename = path + "run1.json"
 
   def __init__(self):
+    self.creature_dict = {}
     pass
 
   def populate_creature_dict(self, creature_list):
-    counter = 0
-    for c in creature_list:
-      self.creature_dict[counter] = c.get_instructions()
-      counter += 1
+    for counter, c in enumerate(creature_list):
+      self.creature_dict[counter] = c.get_raw_genome_list()
+
+    print(self.creature_dict)
     pass
 
   def get_creature_dict(self):
