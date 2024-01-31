@@ -50,6 +50,9 @@ class NeuralNet:
   outputs = []
 
 
+  # =================================================================
+
+
   def __init__(self, creature) -> None:
     self.creature = creature
 
@@ -69,6 +72,12 @@ class NeuralNet:
     random.shuffle(self.inputs)
     random.shuffle(self.outputs)
 
+    pass
+
+
+  def mutate(self):
+    # only mutate one genome
+    random.choice(self.genomes).mutate()
     pass
 
 

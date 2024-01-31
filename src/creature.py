@@ -28,8 +28,13 @@ class Creature:
     pygame.draw.rect(screen, (255, 255, 255), (self.pos.x, self.pos.y, self.size.x, self.size.y))
 
 
+  @staticmethod
+  def static_get_genome_amount():
+    return Creature.genome_amount
+
 
   def mutate(self):
+    self.nn.mutate()
     pass
 
 

@@ -16,18 +16,30 @@ def main():
   dt = 0
   running = True
 
-  creature_amount = 5
+  creature_amount = 2
 
   # init save manager
   sm = save_manager.SaveManager()
   genome_dict = {}
+
+
   try:
     sm.load()
     genome_dict = sm.get_creature_dict()
+    
+    # of the file was empty, throw the error so we can move on
+    if len(genome_dict) == 0:
+      raise FileNotFoundError
+
   except FileNotFoundError:
     # create new creatures 
     for i in range(creature_amount):
-      genome_dict[i] = genome.Genome.get_random_genome()
+      genome_list = []
+      for j in range(creature.Creature.static_get_genome_amount()):
+        genome_list.append(genome.Genome.get_random_genome())
+
+      genome_dict[i] = genome_list
+
 
 
 
@@ -55,6 +67,13 @@ def main():
       new_genome = random.choice(creature_list).get_raw_genome_list()
 
     c.set_raw_genome_list(new_genome)
+
+
+    # lastly, mutate at random
+    if random.random() < .05:
+      c.mutate()
+
+
 
 
   while running:
