@@ -6,12 +6,69 @@ class NeuralNet:
   creature = None
   genomes = []
 
+  
+  # =======================================================================
+  # Inputs functions
+  # =======================================================================
+
+  start_time = 0
   start_time = pygame.time.get_ticks()
   time_interval = 200
+
+  def periodic_activation(self) -> bool:
+    # Calculate elapsed time
+    current_time = pygame.time.get_ticks()
+    elapsed_time = current_time - self.start_time
+
+    # Check if 2 seconds have passed
+    if elapsed_time >= self.time_interval:
+      self.start_time = current_time
+      return True
+    else:
+      return False
+    
+  
+  inputs = []
+
+  # =======================================================================
+  # Outputs functions
+  # =======================================================================
+
+  def move_left(self):
+    self.creature.pos.x -= 10
+
+  def move_right(self):
+    self.creature.pos.x += 10
+
+  def move_up(self):
+    self.creature.pos.y -= 10
+
+  def move_down(self):
+    self.creature.pos.y += 10
+
+
+  outputs = []
 
 
   def __init__(self, creature) -> None:
     self.creature = creature
+
+    # init our inputs and outputs lists
+    self.inputs = [
+      self.periodic_activation
+      ]
+    
+    self.outputs = [
+      self.move_down,
+      self.move_up,
+      self.move_left,
+      self.move_right
+      ]
+    
+    # randomize the list to remove bias
+    random.shuffle(self.inputs)
+    random.shuffle(self.outputs)
+
     pass
 
 
@@ -48,46 +105,6 @@ class NeuralNet:
 
 
       # do the input and it's output function
-      if (self.inputs[input_indx](self)):
-        self.outputs[output_indx](self)
+      if (self.inputs[input_indx]()):
+        self.outputs[output_indx]()
 
-
-  # =======================================================================
-  # Inputs functions
-  # =======================================================================
-
-  start_time = 0
-
-  def periodic_activation(self) -> bool:
-    # Calculate elapsed time
-    current_time = pygame.time.get_ticks()
-    elapsed_time = current_time - self.start_time
-
-    # Check if 2 seconds have passed
-    if elapsed_time >= self.time_interval:
-      self.start_time = current_time
-      return True
-    else:
-      return False
-    
-  
-  inputs = [periodic_activation]
-
-  # =======================================================================
-  # Outputs functions
-  # =======================================================================
-
-  def move_left(self):
-    self.creature.pos.x -= 10
-
-  def move_right(self):
-    self.creature.pos.x += 10
-
-  def move_up(self):
-    self.creature.pos.y -= 10
-
-  def move_down(self):
-    self.creature.pos.y += 10
-
-
-  outputs = [move_left, move_right, move_up, move_down]

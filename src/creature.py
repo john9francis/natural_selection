@@ -9,7 +9,7 @@ class Creature:
   size = pygame.Vector2(5, 5)
   speed = 100
 
-  genome_amount = 10
+  genome_amount = 2
 
   nn = None
 
@@ -52,7 +52,7 @@ class Creature:
 
 
   def set_random_genomes(self):
-    for i in range(self.genome_amount):
+    for _ in range(self.genome_amount):
       g = genome.Genome()
       g.set_random_genome()
       self.nn.add_genome(g)
