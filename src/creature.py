@@ -75,3 +75,12 @@ class Creature:
       raw_list.append(g.get_genome())
 
     return raw_list
+  
+
+  def set_raw_genome_list(self, raw_g_list):
+    ''' populates the genomes off of a plain list of lists'''
+    for i in raw_g_list:
+      g = genome.Genome()
+      g.set_genome(i)
+
+      self.nn.add_genome(g)

@@ -14,12 +14,10 @@ class SaveManager:
     for counter, c in enumerate(creature_list):
       self.creature_dict[counter] = c.get_raw_genome_list()
 
-    print(self.creature_dict)
-    pass
 
   def get_creature_dict(self):
     return self.creature_dict
-    pass
+
 
   def save(self):
     with open(self.filename, 'w') as json_file:

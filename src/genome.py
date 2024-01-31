@@ -30,3 +30,8 @@ class Genome:
     indx = random.randint(0, len(self.genome)-1)
     self.genome[indx] = random.random()
     pass
+
+  @staticmethod
+  def get_random_genome():
+    '''Gets a random genome without having to initialize the class'''
+    return [random.uniform(0.0, 1.0) for _ in range(3)]

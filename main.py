@@ -1,6 +1,7 @@
 import pygame
 import random
 
+from src import genome
 from src import creature
 from src import save_manager
 
@@ -19,10 +20,18 @@ def main():
 
   # init save manager
   sm = save_manager.SaveManager()
+  genome_dict = {}
+  try:
+    sm.load()
+    genome_dict = sm.get_creature_dict()
+  except FileNotFoundError:
+    # create new creatures 
+    for i in range(creature_amount):
+      genome_dict[i] = genome.Genome.get_random_genome()
 
 
 
-  # initialize our creatures if no json file
+  # initialize our creatures
   creature_list = []
   for i in range(creature_amount):
     c = creature.Creature(
@@ -34,11 +43,18 @@ def main():
     # set the screen so they don't fall off of it
     c.set_screen(screen)
 
-    # create their genomes at random
-    c.set_random_genomes()
-
     # add them to creature list
     creature_list.append(c)
+
+    # set their genome to the genome dict unless
+    # their isn't any more, in which case they
+    # inherit from one of the surviving creatures
+    try:
+      new_genome = genome_dict[i]
+    except KeyError:
+      new_genome = random.choice(creature_list).get_raw_genome_list()
+
+    c.set_raw_genome_list(new_genome)
 
 
   while running:
