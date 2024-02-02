@@ -12,18 +12,24 @@ def main():
   screen = pygame.display.set_mode((1280, 720))
   clock = pygame.time.Clock()
 
+  # init save manager
+  sm = save_manager.SaveManager()
+
   dt = 0
   running = True
 
-  creature_amount = 100
+  # set how many creatures we want to test
+  creature_amount = 2
 
-  # init save manager
-  sm = save_manager.SaveManager()
+  # init a genome dict to load our json data to
   genome_dict = {}
 
 
   try:
+    # load from json file
     sm.load()
+
+    # extract the data
     genome_dict = sm.get_creature_dict()
     
     # of the file was empty, throw the error so we can move on
@@ -31,12 +37,18 @@ def main():
       raise FileNotFoundError
 
   except FileNotFoundError:
-    # create new creatures 
+
+    # If file was empty, fill the genome dict with random data
     for i in range(creature_amount):
+
+      # genome list to hold the genome
       genome_list = []
+
+      # append as many instructions as the creatures take
       for j in range(creature.Creature.static_get_genome_amount()):
         genome_list.append([random.uniform(0,1) for _ in range(3)])
 
+      # set it to the creature dict
       genome_dict[i] = genome_list
 
 
@@ -44,7 +56,10 @@ def main():
 
   # initialize our creatures
   creature_list = []
+
   for i in range(creature_amount):
+
+    # give creature a random position
     c = creature.Creature(
       pygame.Vector2(
         random.random() * screen.get_width(), 
@@ -52,6 +67,7 @@ def main():
       )
 
     # set the screen so they don't fall off of it
+    # NOTE: add to constructor
     c.set_screen(screen)
 
     # add them to creature list
@@ -65,6 +81,7 @@ def main():
     except KeyError:
       new_genome = random.choice(creature_list).get_genomes()
 
+    # set the genome to the creature
     c.set_genomes(new_genome)
 
     # finally, finalize the genome to send it to the nn
@@ -100,6 +117,7 @@ def main():
 
 
   # kill all creatures to the right of the screen
+  """
   index = 0
   while index < len(creature_list):
     if creature_list[index].pos.x > screen.get_width() / 2:
@@ -108,10 +126,17 @@ def main():
     else:
       index += 1
 
+  """
+
 
   # save the all the creature's genomes to save file
   sm.populate_creature_dict(creature_list)
+
+  # make sure to clear out old info before saving
+  sm.clear_file()
   sm.save()
+
+  # print survival rate
   print(f"{len(creature_list)} creatures survived this run, a {len(creature_list) / creature_amount * 100} % survival rate.")
 
 

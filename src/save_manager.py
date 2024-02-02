@@ -32,8 +32,20 @@ class SaveManager:
     self.creature_dict = self.convert_string_keys_to_int(self.creature_dict)
     pass
 
+  def clear_file(self):
+    with open(self.filename, 'w') as json_file:
+      json.dump({}, json_file)
+    pass
+
   def convert_string_keys_to_int(self, input_dict):
     # Create a new dictionary with integer keys
     result_dict = {int(key): value for key, value in input_dict.items()}
     return result_dict
 
+
+
+
+# test
+if __name__ == "__main__":
+  with open("runs/run1.json", 'w') as json_file:
+    json.dump({}, json_file)
