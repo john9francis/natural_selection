@@ -75,6 +75,7 @@ class Creature:
       self.genome = genome_list
     else:
       print("Set genomes error in creature.py. wrong length of genome list.")
+      print(f"tried to set {len(genome_list)} into a {self.genome_amount} size list.")
 
 
   def get_genomes(self):

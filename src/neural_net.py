@@ -70,8 +70,9 @@ class NeuralNet:
     
     # randomize the list to remove bias
     # NOTE: This is actually wrong... because it would ruin the genome
-    random.shuffle(self.inputs)
-    random.shuffle(self.outputs)
+    #random.shuffle(self.inputs)
+    #random.shuffle(self.outputs)
+    # There needs to be a different way to remove the bias
 
     pass
 

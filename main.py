@@ -1,7 +1,6 @@
 import pygame
 import random
 
-from src import genome
 from src import creature
 from src import save_manager
 
@@ -100,7 +99,7 @@ def main():
     dt = clock.tick(60) / 1000
 
 
-  # kill all creatures to the left of the screen
+  # kill all creatures to the right of the screen
   index = 0
   while index < len(creature_list):
     if creature_list[index].pos.x > screen.get_width() / 2:
