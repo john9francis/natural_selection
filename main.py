@@ -19,7 +19,7 @@ def main():
   running = True
 
   # set how many creatures we want to test
-  creature_amount = 2
+  creature_amount = 10
 
   # init a genome dict to load our json data to
   genome_dict = {}
@@ -131,6 +131,8 @@ def main():
 
   # save the all the creature's genomes to save file
   sm.populate_creature_dict(creature_list)
+  print(creature_list)
+  print(sm.get_creature_dict())
 
   # make sure to clear out old info before saving
   sm.clear_file()
