@@ -1,5 +1,6 @@
 import pygame
-from . import genome
+import random
+
 from . import neural_net
 
 class Creature:
@@ -10,12 +11,16 @@ class Creature:
   speed = 100
 
   genome_amount = 2
+  genome = []
 
   nn = None
 
   def __init__(self, start_pos):
     self.pos = start_pos
     self.nn = neural_net.NeuralNet(self)
+
+    for _ in range(self.genome_amount):
+      self.genome.append([0, 0, 0])
     
 
   def update(self, dt):
@@ -34,8 +39,10 @@ class Creature:
 
 
   def mutate(self):
-    self.nn.mutate()
     pass
+
+  def finalize_genome(self):
+    self.nn.set_genome_list(self.genome)
 
 
   def stay_on_screen(self):
@@ -57,21 +64,23 @@ class Creature:
 
 
   def set_random_genomes(self):
+    self.genome.clear()
     for _ in range(self.genome_amount):
-      g = genome.Genome()
-      g.set_random_genome()
-      self.nn.add_genome(g)
+      self.genome.append([random.uniform(0,1) for _ in range(3)])
     pass
 
 
   def set_genomes(self, genome_list):
-    self.nn.set_genome_list(genome_list)
+    if len(genome_list) == self.genome_amount:
+      self.genome = genome_list
+    else:
+      print("Set genomes error in creature.py. wrong length of genome list.")
 
 
   def get_genomes(self):
-    return self.nn.get_genome_list()
+    return self.genome
   
-
+  """
   def get_raw_genome_list(self):
     '''returns just a list of lists so it can be json serializable'''
     raw_list = []
@@ -89,3 +98,4 @@ class Creature:
       g.set_genome(i)
 
       self.nn.add_genome(g)
+  """

@@ -12,7 +12,7 @@ class SaveManager:
 
   def populate_creature_dict(self, creature_list):
     for counter, c in enumerate(creature_list):
-      self.creature_dict[counter] = c.get_raw_genome_list()
+      self.creature_dict[counter] = c.get_genomes()
 
 
   def get_creature_dict(self):

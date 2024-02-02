@@ -69,25 +69,13 @@ class NeuralNet:
       ]
     
     # randomize the list to remove bias
+    # NOTE: This is actually wrong... because it would ruin the genome
     random.shuffle(self.inputs)
     random.shuffle(self.outputs)
 
     pass
 
 
-  def mutate(self):
-    # only mutate one genome
-    random.choice(self.genomes).mutate()
-    pass
-
-
-  def add_genome(self, genome):
-    self.genomes.append(genome)
-
-
-  def get_genome_list(self):
-    return self.genomes
-  
 
   def set_genome_list(self, genome_list):
     self.genomes = genome_list
@@ -95,8 +83,7 @@ class NeuralNet:
 
   def update(self, dt):
     # get a random genome
-    genome_object = random.choice(self.genomes)
-    g = genome_object.get_genome()
+    g = random.choice(self.genomes)
 
     # only continue if the weight is bigger than our random val
     if g[2] > random.random():
@@ -113,7 +100,7 @@ class NeuralNet:
         output_indx = math.ceil(g[0] * (len(self.outputs) - 1))
 
 
-      # do the input and it's output function
+      # if the input func returns true, do the output
       if (self.inputs[input_indx]()):
         self.outputs[output_indx]()
 

@@ -16,7 +16,7 @@ def main():
   dt = 0
   running = True
 
-  creature_amount = 2
+  creature_amount = 100
 
   # init save manager
   sm = save_manager.SaveManager()
@@ -36,7 +36,7 @@ def main():
     for i in range(creature_amount):
       genome_list = []
       for j in range(creature.Creature.static_get_genome_amount()):
-        genome_list.append(genome.Genome.get_random_genome())
+        genome_list.append([random.uniform(0,1) for _ in range(3)])
 
       genome_dict[i] = genome_list
 
@@ -64,14 +64,17 @@ def main():
     try:
       new_genome = genome_dict[i]
     except KeyError:
-      new_genome = random.choice(creature_list).get_raw_genome_list()
+      new_genome = random.choice(creature_list).get_genomes()
 
-    c.set_raw_genome_list(new_genome)
+    c.set_genomes(new_genome)
+
+    # finally, finalize the genome to send it to the nn
+    c.finalize_genome()
 
 
     # lastly, mutate at random
-    if random.random() < .05:
-      c.mutate()
+    #if random.random() < .05:
+    #  c.mutate()
 
 
 
