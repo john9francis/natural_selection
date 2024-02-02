@@ -21,6 +21,26 @@ def main():
   # set how many creatures we want to test
   creature_amount = 10
 
+  """
+  TO DO: OPTIMIZE MAIN FILE
+  
+  --start--
+  1. set creature amount
+  2. check if json exists and is not empty
+    a. if json is empty, create creature amount creatures with random genomes
+    b. if json is not empty, create creatures based on the genomes in the json
+      i. if there are more creatures than json, generate the remaining ones random
+      ii. if there are less creatures than json, just do the first json ones 
+  3. mutate some creatures
+  
+  --end--
+  1. kill some creatures based on a condition
+  2. delete json file or clear it
+  3. put genomes of surviving creatures in the json
+  """
+
+
+
   # init a genome dict to load our json data to
   genome_dict = {}
 
