@@ -77,11 +77,15 @@ class Creature:
 
   def set_random_genomes(self):
     self.genome.clear()
+
+    # Use a local Random instance to avoid affecting the global random state
+    local_random = random.Random()
+
     for _ in range(self.genome_amount):
-      self.genome.append([random.uniform(0,1) for _ in range(3)])
+      self.genome.append([local_random.uniform(0, 1) for _ in range(3)])
 
     self.finalize_genome()
-    pass
+
 
 
   def set_genomes(self, genome_list):

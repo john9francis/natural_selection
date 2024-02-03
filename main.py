@@ -29,6 +29,7 @@ def main():
         c.set_genomes(genome)
       else:
         c.set_random_genomes()
+        print("Setting from the save file didn't work")
 
       new_creature_list.append(c)
     
@@ -48,8 +49,7 @@ def main():
         screen
       )
 
-      # NOTE: c.set_random_genomes is biased
-      #c.set_random_genomes() 
+      c.set_random_genomes() 
 
       new_creature_list.append(c)
 
@@ -129,6 +129,10 @@ def main():
 
       creature_list.append(c)
 
+
+  # DEBUGGING
+  for i in range(min(5, len(creature_list))):
+      print(f"Creature {i + 1} Genome: {creature_list[i].get_genomes()}")
 
 
   # Mutate a few
