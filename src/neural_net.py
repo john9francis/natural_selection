@@ -87,18 +87,11 @@ class NeuralNet:
     g = random.choice(self.genomes)
 
     # only continue if the weight is bigger than our random val
-    if g[2] > random.random():
+    if g[2] > random.uniform(0,1):
 
       # get the indices by turning the floats into ints.
-      # note: we will randomly go floor or ceil to not be biased
-      if random.random() > .5:
-        input_indx = math.floor(g[0] * (len(self.inputs) - 1))
-      else:
-        input_indx = math.ceil(g[0] * (len(self.inputs) - 1))
-      if random.random() > .5:
-        output_indx = math.floor(g[0] * (len(self.outputs) - 1))
-      else:
-        output_indx = math.ceil(g[0] * (len(self.outputs) - 1))
+      input_indx = round(g[0] * len(self.inputs) - 1)
+      output_indx = round(g[1] * len(self.outputs) - 1)
 
 
       # if the input func returns true, do the output

@@ -53,7 +53,7 @@ def main():
       new_creature_list.append(c)
 
     return new_creature_list
-
+  
 
   # initialization settings:
   pygame.init()
@@ -106,9 +106,22 @@ def main():
 
   if len(creature_list) < creature_amount:
 
-    # finish it off with random creatures
+    # finish it off by repopulating from the surviving creatures
     left_over = creature_amount - len(creature_list)
-    creature_list += create_random_creatures(left_over)
+    for _ in range(left_over):
+      c = creature.Creature(
+        pygame.Vector2(
+          random.uniform(0,1) * screen.get_width(),
+          random.uniform(0,1) * screen.get_height()
+        ),
+        screen
+      )
+
+      parent = random.choice(creature_list)
+      c.set_genomes(parent.get_genomes())
+
+      creature_list.append(c)
+
 
 
   # Mutate a few
