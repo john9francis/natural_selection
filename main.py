@@ -6,7 +6,54 @@ from src import save_manager
 
 
 
+
+
 def main():
+
+  # FUNCTIONS
+  def create_creatures_from_dict(_creature_dict) -> list:
+    new_creature_list = []
+
+    for key, value in enumerate(_creature_dict):
+      c = creature.Creature(
+        pygame.Vector2(
+          random.uniform(0,1) * screen.get_width(),
+          random.uniform(0,1) * screen.get_height()
+        ),
+        screen
+      )
+
+      # now set the genome to the value of the dict
+      if len(value) == c.get_genome_amount():
+        c.set_genomes(value)
+      else:
+        c.set_random_genomes()
+
+      new_creature_list.append(c)
+    
+
+    return new_creature_list
+
+
+  def create_random_creatures(_creature_amount) -> list:
+    new_creature_list = []
+
+    for _ in range(_creature_amount):
+      c = creature.Creature(
+        pygame.Vector2(
+          random.uniform(0,1) * screen.get_width(),
+          random.uniform(0,1) * screen.get_height()
+        ),
+        screen
+      )
+
+      c.set_random_genomes()
+
+      new_creature_list.append(c)
+
+    return new_creature_list
+
+
   # initialization settings:
   pygame.init()
   screen = pygame.display.set_mode((1280, 720))
@@ -39,80 +86,28 @@ def main():
   3. put genomes of surviving creatures in the json
   """
 
-
-
-  # init a genome dict to load our json data to
-  genome_dict = {}
-
+  creature_list = list()
 
   try:
-    # load from json file
     sm.load()
 
-    # extract the data
-    genome_dict = sm.get_creature_dict()
-    
-    # of the file was empty, throw the error so we can move on
-    if len(genome_dict) == 0:
+    creature_dict = sm.get_creature_dict()
+
+    if len(creature_dict) > 0:
+      creature_list = create_creatures_from_dict(creature_dict)
+    else:
       raise FileNotFoundError
 
   except FileNotFoundError:
-
-    # If file was empty, fill the genome dict with random data
-    for i in range(creature_amount):
-
-      # genome list to hold the genome
-      genome_list = []
-
-      # append as many instructions as the creatures take
-      for j in range(creature.Creature.static_get_genome_amount()):
-        genome_list.append([random.uniform(0,1) for _ in range(3)])
-
-      # set it to the creature dict
-      genome_dict[i] = genome_list
+    creature_list = create_random_creatures(creature_amount)
+    pass
 
 
+  if len(creature_list) < creature_amount:
 
-
-  # initialize our creatures
-  creature_list = []
-
-  for i in range(creature_amount):
-
-    # give creature a random position
-    c = creature.Creature(
-      pygame.Vector2(
-        random.random() * screen.get_width(), 
-        random.random() * screen.get_height()),
-      )
-
-    # set the screen so they don't fall off of it
-    # NOTE: add to constructor
-    c.set_screen(screen)
-
-    # add them to creature list
-    creature_list.append(c)
-
-    # set their genome to the genome dict unless
-    # their isn't any more, in which case they
-    # inherit from one of the surviving creatures
-    try:
-      new_genome = genome_dict[i]
-    except KeyError:
-      new_genome = random.choice(creature_list).get_genomes()
-
-    # set the genome to the creature
-    c.set_genomes(new_genome)
-
-    # finally, finalize the genome to send it to the nn
-    c.finalize_genome()
-
-
-    # lastly, mutate at random
-    #if random.random() < .05:
-    #  c.mutate()
-
-
+    # finish it off with random creatures
+    left_over = creature_amount - len(creature_list)
+    creature_list += create_random_creatures(left_over)
 
 
   while running:

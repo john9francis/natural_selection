@@ -15,12 +15,14 @@ class Creature:
 
   nn = None
 
-  def __init__(self, start_pos):
+  def __init__(self, start_pos, screen):
     self.pos = start_pos
     self.nn = neural_net.NeuralNet(self)
 
     for _ in range(self.genome_amount):
       self.genome.append([0, 0, 0])
+
+    self.set_screen(screen)
     
 
   def update(self, dt):
@@ -31,6 +33,9 @@ class Creature:
   def draw(self, screen):
     # draw basic white rect
     pygame.draw.rect(screen, (255, 255, 255), (self.pos.x, self.pos.y, self.size.x, self.size.y))
+
+  def get_genome_amount(self):
+    return self.genome_amount
 
 
   @staticmethod
@@ -67,6 +72,8 @@ class Creature:
     self.genome.clear()
     for _ in range(self.genome_amount):
       self.genome.append([random.uniform(0,1) for _ in range(3)])
+
+    self.finalize_genome()
     pass
 
 
@@ -76,6 +83,8 @@ class Creature:
     else:
       print("Set genomes error in creature.py. wrong length of genome list.")
       print(f"tried to set {len(genome_list)} into a {self.genome_amount} size list.")
+
+    self.finalize_genome()
 
 
   def get_genomes(self):
