@@ -53,12 +53,6 @@ def main():
 
       new_creature_list.append(c)
 
-
-    # mutate all creatures a bunch of times
-    for c in new_creature_list:
-      c.mutate()
-      c.mutate()
-      c.mutate()
     return new_creature_list
   
 

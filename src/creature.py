@@ -15,6 +15,8 @@ class Creature:
 
   nn = None
 
+  _random = None
+
   def __init__(self, start_pos, screen):
     self.pos = start_pos
     self.nn = neural_net.NeuralNet(self)
@@ -26,6 +28,8 @@ class Creature:
     self.finalize_genome()
 
     self.set_screen(screen)
+
+    self._random = random.Random()
     
 
   def update(self, dt):
@@ -48,9 +52,9 @@ class Creature:
 
   def mutate(self):
     # change one random value in the genome
-    indx1 = random.randint(0, len(self.genome)-1)
-    indx2 = random.randint(0,2)
-    self.genome[indx1][indx2] = random.uniform(0,1)
+    indx1 = self._random.randint(0, len(self.genome)-1)
+    indx2 = self._random.randint(0,2)
+    self.genome[indx1][indx2] = self._random.uniform(0,1)
     pass
 
   def finalize_genome(self):
@@ -78,11 +82,8 @@ class Creature:
   def set_random_genomes(self):
     self.genome.clear()
 
-    # Use a local Random instance to avoid affecting the global random state
-    local_random = random.Random()
-
     for _ in range(self.genome_amount):
-      self.genome.append([local_random.uniform(0, 1) for _ in range(3)])
+      self.genome.append([self._random.uniform(0, 1) for _ in range(3)])
 
     self.finalize_genome()
 
