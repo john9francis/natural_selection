@@ -67,7 +67,7 @@ def main():
   running = True
 
   # set how many creatures we want to test
-  creature_amount = 10
+  creature_amount = 100
 
   """
   TO DO: OPTIMIZE MAIN FILE
@@ -111,6 +111,12 @@ def main():
     creature_list += create_random_creatures(left_over)
 
 
+  # Mutate a few
+  for _ in range(5):
+    random.choice(creature_list).mutate()
+
+
+
   while running:
     # allow to quit
     for event in pygame.event.get():
@@ -132,17 +138,17 @@ def main():
     dt = clock.tick(60) / 1000
 
 
-  # kill all creatures to the right of the screen
-  """
+  # kill all creatures to the left of the screen
+  
   index = 0
   while index < len(creature_list):
-    if creature_list[index].pos.x > screen.get_width() / 2:
+    if creature_list[index].pos.x < screen.get_width() / 2:
       # creature on the right, kill them
       creature_list.pop(index)
     else:
       index += 1
 
-  """
+  
 
 
   # save the all the creature's genomes to save file
@@ -152,6 +158,7 @@ def main():
 
   # make sure to clear out old info before saving
   sm.clear_file()
+  sm.populate_creature_dict(creature_list)
   sm.save()
 
   # print survival rate

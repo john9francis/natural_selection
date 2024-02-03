@@ -11,6 +11,10 @@ class SaveManager:
     pass
 
   def populate_creature_dict(self, creature_list):
+    # first, clear out creature dict
+    self.creature_dict.clear()
+
+    # then populate with new data
     for counter, c in enumerate(creature_list):
       self.creature_dict[counter] = c.get_genomes()
 

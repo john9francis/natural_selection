@@ -44,6 +44,10 @@ class Creature:
 
 
   def mutate(self):
+    # change one random value in the genome
+    indx1 = random.randint(0, len(self.genome)-1)
+    indx2 = random.randint(0,2)
+    self.genome[indx1][indx2] = random.uniform(0,1)
     pass
 
   def finalize_genome(self):
