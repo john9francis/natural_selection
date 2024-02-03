@@ -17,19 +17,20 @@ class Creature:
 
   _random = None
 
-  def __init__(self, start_pos, screen):
+  def __init__(self, start_pos, screen, seed):
     self.pos = start_pos
     self.nn = neural_net.NeuralNet(self)
+    self._random = random.Random()
+    self._random.seed(seed)
 
     self.genome.clear()
     for _ in range(self.genome_amount):
-      self.genome.append([0 for _ in range(3)])
+      self.genome.append([self._random.uniform(0,1) for _ in range(3)])
 
     self.finalize_genome()
 
     self.set_screen(screen)
 
-    self._random = random.Random()
     
 
   def update(self, dt):

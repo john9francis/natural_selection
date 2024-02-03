@@ -1,3 +1,4 @@
+from time import sleep
 import pygame
 import random
 
@@ -20,7 +21,8 @@ def main():
           random.uniform(0,1) * screen.get_width(),
           random.uniform(0,1) * screen.get_height()
         ),
-        screen
+        screen,
+        seed=random.uniform(0,1) * screen.get_width()
       )
 
       # now set the genome to the value of the dict
@@ -46,10 +48,11 @@ def main():
           random.uniform(0,1) * screen.get_width(),
           random.uniform(0,1) * screen.get_height()
         ),
-        screen
+        screen,
+        seed=random.uniform(0,1) * screen.get_width()
       )
 
-      c.set_random_genomes() 
+      #c.set_random_genomes() 
 
       new_creature_list.append(c)
 
@@ -115,7 +118,8 @@ def main():
           random.uniform(0,1) * screen.get_width(),
           random.uniform(0,1) * screen.get_height()
         ),
-        screen
+        screen,
+        seed=random.uniform(0,1) * screen.get_width()
       )
 
       parent = random.choice(creature_list)
@@ -126,12 +130,14 @@ def main():
 
   # DEBUGGING
   for i in range(min(5, len(creature_list))):
-      print(f"Creature {i + 1} Genome: {creature_list[i].get_genomes()}")
+    print(f"Creature {i + 1} Genome: {creature_list[i].get_genomes()}")
+    print(f"Creature id: {id(creature_list[i])}")
+  
 
 
   # Mutate a few
-  for _ in range(5):
-    random.choice(creature_list).mutate()
+  #for _ in range(5):
+  #  random.choice(creature_list).mutate()
 
 
 
@@ -175,7 +181,7 @@ def main():
   # make sure to clear out old info before saving
   sm.clear_file()
   sm.populate_creature_dict(creature_list)
-  sm.save()
+  #sm.save()
 
   # print survival rate
   print(f"{len(creature_list)} creatures survived this run, a {len(creature_list) / creature_amount * 100} % survival rate.")
