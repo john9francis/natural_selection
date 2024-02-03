@@ -14,7 +14,7 @@ def main():
   def create_creatures_from_dict(_creature_dict) -> list:
     new_creature_list = []
 
-    for key, value in enumerate(_creature_dict):
+    for key in _creature_dict:
       c = creature.Creature(
         pygame.Vector2(
           random.uniform(0,1) * screen.get_width(),
@@ -24,8 +24,9 @@ def main():
       )
 
       # now set the genome to the value of the dict
-      if len(value) == c.get_genome_amount():
-        c.set_genomes(value)
+      genome = _creature_dict[key]
+      if len(genome) == c.get_genome_amount():
+        c.set_genomes(genome)
       else:
         c.set_random_genomes()
 
