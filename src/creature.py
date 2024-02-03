@@ -19,8 +19,11 @@ class Creature:
     self.pos = start_pos
     self.nn = neural_net.NeuralNet(self)
 
+    self.genome.clear()
     for _ in range(self.genome_amount):
-      self.genome.append([0, 0, 0])
+      self.genome.append([0 for _ in range(3)])
+
+    self.finalize_genome()
 
     self.set_screen(screen)
     

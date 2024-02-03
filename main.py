@@ -48,10 +48,17 @@ def main():
         screen
       )
 
-      c.set_random_genomes()
+      # NOTE: c.set_random_genomes is biased
+      #c.set_random_genomes() 
 
       new_creature_list.append(c)
 
+
+    # mutate all creatures a bunch of times
+    for c in new_creature_list:
+      c.mutate()
+      c.mutate()
+      c.mutate()
     return new_creature_list
   
 
@@ -166,8 +173,6 @@ def main():
 
   # save the all the creature's genomes to save file
   sm.populate_creature_dict(creature_list)
-  print(creature_list)
-  print(sm.get_creature_dict())
 
   # make sure to clear out old info before saving
   sm.clear_file()
