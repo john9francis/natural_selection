@@ -53,7 +53,6 @@ def main():
       c.set_genomes([
         [random.uniform(0,1), random.uniform(0,1), random.uniform(0,1)], 
         [random.uniform(0,1), random.uniform(0,1), random.uniform(0,1)], 
-        [random.uniform(0,1), random.uniform(0,1), random.uniform(0,1)], 
         ])
 
       new_creature_list.append(c)
@@ -93,7 +92,7 @@ def main():
   3. put genomes of surviving creatures in the json
   """
 
-  creature_list = list()
+  creature_list = []
 
   try:
     sm.load()
