@@ -78,13 +78,9 @@ class NeuralNet:
 
 
 
-  def set_genome_list(self, genome_list):
-    self.genomes = genome_list
-
-
   def update(self, dt):
     # get a random genome
-    g = random.choice(self.genomes)
+    g = random.choice(self.creature.get_genomes())
 
     # only continue if the weight is bigger than our random val
     if g[2] > random.uniform(0,1):

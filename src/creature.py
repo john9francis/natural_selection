@@ -17,17 +17,21 @@ class Creature:
 
   _random = None
 
-  def __init__(self, start_pos, screen, seed):
+  def __init__(self, start_pos, screen):
     self.pos = start_pos
     self.nn = neural_net.NeuralNet(self)
     self._random = random.Random()
-    self._random.seed(seed)
 
     self.genome.clear()
-    for _ in range(self.genome_amount):
-      self.genome.append([self._random.uniform(0,1) for _ in range(3)])
+    #for _ in range(self.genome_amount):
+    #  self.genome.append([self._random.uniform(0,1) for _ in range(3)])
 
-    self.finalize_genome()
+    for _ in range(self.genome_amount):
+      g1 = []
+      g1.append(random.uniform(0,1))
+      g1.append(random.uniform(0,1))
+      g1.append(random.uniform(0,1))
+      self.genome.append(g1)
 
     self.set_screen(screen)
 
@@ -58,9 +62,6 @@ class Creature:
     self.genome[indx1][indx2] = self._random.uniform(0,1)
     pass
 
-  def finalize_genome(self):
-    self.nn.set_genome_list(self.genome)
-
 
   def stay_on_screen(self):
     if self._screen != None:
@@ -86,8 +87,6 @@ class Creature:
     for _ in range(self.genome_amount):
       self.genome.append([self._random.uniform(0, 1) for _ in range(3)])
 
-    self.finalize_genome()
-
 
 
   def set_genomes(self, genome_list):
@@ -96,8 +95,6 @@ class Creature:
     else:
       print("Set genomes error in creature.py. wrong length of genome list.")
       print(f"tried to set {len(genome_list)} into a {self.genome_amount} size list.")
-
-    self.finalize_genome()
 
 
   def get_genomes(self):

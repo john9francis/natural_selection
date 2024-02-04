@@ -22,7 +22,6 @@ def main():
           random.uniform(0,1) * screen.get_height()
         ),
         screen,
-        seed=random.uniform(0,1) * screen.get_width()
       )
 
       # now set the genome to the value of the dict
@@ -49,10 +48,13 @@ def main():
           random.uniform(0,1) * screen.get_height()
         ),
         screen,
-        seed=random.uniform(0,1) * screen.get_width()
       )
 
-      #c.set_random_genomes() 
+      c.set_genomes([
+        [random.uniform(0,1), random.uniform(0,1), random.uniform(0,1)], 
+        [random.uniform(0,1), random.uniform(0,1), random.uniform(0,1)], 
+        [random.uniform(0,1), random.uniform(0,1), random.uniform(0,1)], 
+        ])
 
       new_creature_list.append(c)
 
@@ -99,16 +101,21 @@ def main():
     creature_dict = sm.get_creature_dict()
 
     if len(creature_dict) > 0:
+      print("loading from file")
       creature_list = create_creatures_from_dict(creature_dict)
     else:
       raise FileNotFoundError
 
   except FileNotFoundError:
+    print("Creating random creatures")
     creature_list = create_random_creatures(creature_amount)
+    for c in creature_list:
+      print(c.get_genomes())
     pass
 
 
   if len(creature_list) < creature_amount:
+    print("Repopulating from survivors")
 
     # finish it off by repopulating from the surviving creatures
     left_over = creature_amount - len(creature_list)
@@ -119,7 +126,6 @@ def main():
           random.uniform(0,1) * screen.get_height()
         ),
         screen,
-        seed=random.uniform(0,1) * screen.get_width()
       )
 
       parent = random.choice(creature_list)
@@ -127,11 +133,6 @@ def main():
 
       creature_list.append(c)
 
-
-  # DEBUGGING
-  for i in range(min(5, len(creature_list))):
-    print(f"Creature {i + 1} Genome: {creature_list[i].get_genomes()}")
-    print(f"Creature id: {id(creature_list[i])}")
   
 
 
