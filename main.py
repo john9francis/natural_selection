@@ -108,8 +108,6 @@ def main():
   except FileNotFoundError:
     print("Creating random creatures")
     creature_list = create_random_creatures(creature_amount)
-    for c in creature_list:
-      print(c.get_genomes())
     pass
 
 
@@ -136,8 +134,8 @@ def main():
 
 
   # Mutate a few
-  #for _ in range(5):
-  #  random.choice(creature_list).mutate()
+  for _ in range(5):
+    random.choice(creature_list).mutate()
 
 
 
@@ -166,7 +164,7 @@ def main():
   
   index = 0
   while index < len(creature_list):
-    if creature_list[index].pos.x < screen.get_width() / 2:
+    if creature_list[index].pos.y > screen.get_height() / 2:
       # creature on the right, kill them
       creature_list.pop(index)
     else:
@@ -181,7 +179,7 @@ def main():
   # make sure to clear out old info before saving
   sm.clear_file()
   sm.populate_creature_dict(creature_list)
-  #sm.save()
+  sm.save()
 
   # print survival rate
   print(f"{len(creature_list)} creatures survived this run, a {len(creature_list) / creature_amount * 100} % survival rate.")
