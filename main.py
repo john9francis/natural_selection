@@ -163,7 +163,7 @@ def main():
 
   # kill the weak creatures
   killer = creature_killer.CreatureKiller(screen)
-  creature_list = killer.kill_creatures_on_left(creature_list)
+  creature_list = killer.kill_creatures_on_right(creature_list)
 
   
   # save the all the creature's genomes to save file
