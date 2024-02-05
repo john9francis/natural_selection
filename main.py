@@ -4,6 +4,7 @@ import random
 
 from src import creature
 from src import save_manager
+from src import creature_killer
 
 
 
@@ -160,19 +161,11 @@ def main():
     dt = clock.tick(60) / 1000
 
 
-  # kill all creatures to the left of the screen
-  
-  index = 0
-  while index < len(creature_list):
-    if creature_list[index].pos.y > screen.get_height() / 2:
-      # creature on the right, kill them
-      creature_list.pop(index)
-    else:
-      index += 1
+  # kill the weak creatures
+  killer = creature_killer.CreatureKiller(screen)
+  creature_list = killer.kill_creatures_on_left(creature_list)
 
   
-
-
   # save the all the creature's genomes to save file
   sm.populate_creature_dict(creature_list)
 
