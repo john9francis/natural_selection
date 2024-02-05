@@ -1,6 +1,5 @@
 import pygame
 import random
-import math
 
 class NeuralNet:
   creature = None
