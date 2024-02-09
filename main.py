@@ -1,5 +1,6 @@
 import pygame
 from src import creature_list
+from src import player as p
 
 
 def main():
@@ -17,6 +18,10 @@ def main():
   c_list.initialize_creature_list()
 
 
+  # initialize a player
+  player = p.Player(screen)
+
+
   while running:
     # allow to quit
     for event in pygame.event.get():
@@ -29,6 +34,10 @@ def main():
 
     # update our creatures
     c_list.update(dt)
+
+    # update player
+    player.update(dt)
+    player.draw()
 
 
     # update the screen

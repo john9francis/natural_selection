@@ -1,6 +1,9 @@
 import pygame
 
 class Player:
+  '''
+  WASD controlled player
+  '''
 
   pos = pygame.Vector2()
   size = pygame.Vector2(50, 50)
@@ -36,9 +39,9 @@ class Player:
       self.pos.y = 0
 
 
-  def draw(self, screen):
+  def draw(self):
     # Draw basic white rect
-    pygame.draw.rect(screen, (255, 255, 255), (self.pos.x, self.pos.y, self.size.x, self.size.y))
+    pygame.draw.rect(self.screen, (255, 255, 255), (self.pos.x, self.pos.y, self.size.x, self.size.y))
 
 
 
