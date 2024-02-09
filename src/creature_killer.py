@@ -13,7 +13,7 @@ class CreatureKiller:
     '''
     index = 0
     while index < len(creature_list):
-      if creature_list[index].pos.x < self.screen.get_height() / 2:
+      if creature_list[index].pos.x < self.screen.get_width() / 2:
         creature_list.pop(index)
       else:
         index += 1
@@ -28,7 +28,7 @@ class CreatureKiller:
     '''
     index = 0
     while index < len(creature_list):
-      if creature_list[index].pos.x > self.screen.get_height() / 2:
+      if creature_list[index].pos.x > self.screen.get_width() / 2:
         creature_list.pop(index)
       else:
         index += 1

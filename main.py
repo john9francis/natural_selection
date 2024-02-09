@@ -60,6 +60,27 @@ def main():
     return new_creature_list
   
 
+  def repopulate_creatures(_creature_amount) -> list:
+
+    new_creatures = []
+
+    for _ in range(_creature_amount):
+      c = creature.Creature(
+        pygame.Vector2(
+          random.uniform(0,1) * screen.get_width(),
+          random.uniform(0,1) * screen.get_height()
+        ),
+        screen,
+      )
+
+      parent = random.choice(creature_list)
+      c.set_genomes(parent.get_genomes())
+
+      new_creatures.append(c)
+
+    return new_creatures
+  
+
   # initialization settings:
   pygame.init()
   screen = pygame.display.set_mode((1280, 720))
@@ -74,24 +95,7 @@ def main():
   # set how many creatures we want to test
   creature_amount = 100
 
-  """
-  TO DO: OPTIMIZE MAIN FILE
-  
-  --start--
-  1. set creature amount
-  2. check if json exists and is not empty
-    a. if json is empty, create creature amount creatures with random genomes
-    b. if json is not empty, create creatures based on the genomes in the json
-      i. if there are more creatures than json, generate the remaining ones random
-      ii. if there are less creatures than json, just do the first json ones 
-  3. mutate some creatures
-  
-  --end--
-  1. kill some creatures based on a condition
-  2. delete json file or clear it
-  3. put genomes of surviving creatures in the json
-  """
-
+  # initialize creature list
   creature_list = []
 
   try:
@@ -113,24 +117,9 @@ def main():
 
   if len(creature_list) < creature_amount:
     print("Repopulating from survivors")
+    repopulated_creatures = repopulate_creatures(creature_amount - len(creature_list))
+    creature_list.extend(repopulated_creatures)
 
-    # finish it off by repopulating from the surviving creatures
-    left_over = creature_amount - len(creature_list)
-    for _ in range(left_over):
-      c = creature.Creature(
-        pygame.Vector2(
-          random.uniform(0,1) * screen.get_width(),
-          random.uniform(0,1) * screen.get_height()
-        ),
-        screen,
-      )
-
-      parent = random.choice(creature_list)
-      c.set_genomes(parent.get_genomes())
-
-      creature_list.append(c)
-
-  
 
 
   # Mutate a few
