@@ -5,6 +5,10 @@ from . import neural_net
 from . import rand_singleton
 
 class Creature:
+
+  # APPARENTLY THESE ATTRIBUTES HERE ARE
+  # SHARED BY ANY INSTANCE OF THIS CLASS......
+
   _screen = None
 
   pos = pygame.Vector2(500, 50)
