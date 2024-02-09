@@ -11,7 +11,7 @@ class Creature:
   size = pygame.Vector2(5, 5)
   speed = 100
 
-  genome_amount = 2
+  genome_amount = 10
   genome = []
 
   nn = None
