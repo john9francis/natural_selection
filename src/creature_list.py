@@ -49,7 +49,7 @@ class CreatureList:
 
     if len(self._creature_list) < self._creature_amount:
       print("Repopulating from survivors")
-      repopulated_creatures = self.repopulate_creatures(self._creature_amount - len(self._creature_list))
+      repopulated_creatures = self.repopulate_creatures()
       self._creature_list.extend(repopulated_creatures)
       pass
 
@@ -85,8 +85,6 @@ class CreatureList:
       f"{len(self._creature_list)} creatures survived this run, a {len(self._creature_list) / self._creature_amount * 100} % survival rate.")
 
 
-
-  
 
 
   # Specific creature generation functions
@@ -156,11 +154,25 @@ class CreatureList:
     return new_creature_list
   
 
-  def repopulate_creatures(self, _creature_amount) -> list:
+  def runtime_repopulate_creatures(self):
+    self._creature_list.extend(self.repopulate_creatures())
+    self.mutate_creatures()
+  
+
+  def repopulate_creatures(self, creature_amount=0) -> list:
+    '''
+    Repopulates creatures by duplicating genomes from the
+    already existing creatures. default behavior is to 
+    repopulate the set creature amount - the length of the creature list
+    thus making the creature list's new length be the set creature amount. 
+    '''
+    if creature_amount == 0:
+      creature_amount = self._creature_amount - len(self._creature_list)
+
 
     new_creatures = []
 
-    for _ in range(_creature_amount):
+    for _ in range(creature_amount):
       c = creature.Creature(
         pygame.Vector2(
           random.uniform(0,1) * self._screen.get_width(),

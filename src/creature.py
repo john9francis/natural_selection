@@ -46,6 +46,8 @@ class Creature:
     # draw basic white rect
     pygame.draw.rect(screen, (255, 255, 255), (self.pos.x, self.pos.y, self.size.x, self.size.y))
 
+
+
   def get_genome_amount(self):
     return self.genome_amount
 
@@ -62,6 +64,11 @@ class Creature:
     self.genome[indx1][indx2] = self._random.uniform(0,1)
     pass
 
+
+  def remove_self_from_list(self, list_to_leave: list):
+    if self in list_to_leave:
+      list_to_leave.remove(self)
+    pass
 
   def stay_on_screen(self):
     if self._screen != None:
