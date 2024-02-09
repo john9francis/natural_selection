@@ -46,8 +46,8 @@ class Player:
 
 
   def check_if_in_hitbox(self, other_object_pos:pygame.Vector2) -> bool:
-    left = self.pos.x
-    top = self.pos.y
+    left = self.pos.x - 1
+    top = self.pos.y - 1
     right = self.pos.x + self.size.x
     bottom = self.pos.y + self.size.y
 
