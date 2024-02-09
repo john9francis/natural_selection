@@ -62,6 +62,10 @@ def main():
     # end game loop
 
 
+  # debug print
+  for c in c_list._creature_list:
+    print(c.get_genomes())
+
   # kill weak creatures and reset
   c_list.kill_some_creatures()
   c_list.save_and_reset()
