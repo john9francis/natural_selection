@@ -7,6 +7,7 @@ import random
 from src import creature
 from src import save_manager
 from src import creature_killer
+from src import rand_singleton
 
 class CreatureList:
 
@@ -155,8 +156,14 @@ class CreatureList:
   
 
   def runtime_repopulate_creatures(self):
-    self._creature_list.extend(self.repopulate_creatures())
-    self.mutate_creatures()
+    new_creatures = self.repopulate_creatures()
+
+    # mutate ONLY from the new creatures
+    for _ in range(5):
+      random.choice(new_creatures).mutate()
+    
+    # add the new ones onto the total creatures
+    self._creature_list.extend(new_creatures)
   
 
   def repopulate_creatures(self, creature_amount=0) -> list:

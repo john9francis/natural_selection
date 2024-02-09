@@ -2,6 +2,7 @@ import pygame
 import random
 
 from . import neural_net
+from . import rand_singleton
 
 class Creature:
   _screen = None
@@ -59,9 +60,13 @@ class Creature:
 
   def mutate(self):
     # change one random value in the genome
-    indx1 = self._random.randint(0, len(self.genome)-1)
-    indx2 = self._random.randint(0,2)
-    self.genome[indx1][indx2] = self._random.uniform(0,1)
+
+    # access random singleton
+    rand = rand_singleton.RandSingleton()
+
+    indx1 = rand._random.randint(0, len(self.genome)-1)
+    indx2 = rand._random.randint(0,2)
+    self.genome[indx1][indx2] = rand._random.uniform(0,1)
     pass
 
 
