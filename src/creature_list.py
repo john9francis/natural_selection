@@ -94,7 +94,7 @@ class CreatureList:
   def mutate_creatures(self, how_many=5):
     # Mutate a few
     for _ in range(how_many):
-      random.choice(self._creature_list).mutate()
+      rand_singleton.RandSingleton()._random.choice(self._creature_list).mutate()
 
 
   def kill_some_creatures(self):
@@ -113,8 +113,8 @@ class CreatureList:
     for key in _creature_dict:
       c = creature.Creature(
         pygame.Vector2(
-          random.uniform(0,1) * self._screen.get_width(),
-          random.uniform(0,1) * self._screen.get_height()
+          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_width(),
+          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_height()
         ),
         self._screen,
       )
@@ -139,16 +139,13 @@ class CreatureList:
     for _ in range(_creature_amount):
       c = creature.Creature(
         pygame.Vector2(
-          random.uniform(0,1) * self._screen.get_width(),
-          random.uniform(0,1) * self._screen.get_height()
+          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_width(),
+          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_height()
         ),
         self._screen,
       )
 
-      c.set_genomes([
-        [random.uniform(0,1), random.uniform(0,1), random.uniform(0,1)], 
-        [random.uniform(0,1), random.uniform(0,1), random.uniform(0,1)], 
-        ])
+      c.set_random_genomes()
 
       new_creature_list.append(c)
 
@@ -160,7 +157,7 @@ class CreatureList:
 
     # mutate ONLY from the new creatures
     for _ in range(5):
-      random.choice(new_creatures).mutate()
+      rand_singleton.RandSingleton()._random.choice(new_creatures).mutate()
     
     # add the new ones onto the total creatures
     self._creature_list.extend(new_creatures)
@@ -182,13 +179,13 @@ class CreatureList:
     for _ in range(creature_amount):
       c = creature.Creature(
         pygame.Vector2(
-          random.uniform(0,1) * self._screen.get_width(),
-          random.uniform(0,1) * self._screen.get_height()
+          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_width(),
+          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_height()
         ),
         self._screen,
       )
 
-      parent = random.choice(self._creature_list)
+      parent = rand_singleton.RandSingleton()._random.choice(self._creature_list)
       c.set_genomes(parent.get_genomes())
 
       new_creatures.append(c)

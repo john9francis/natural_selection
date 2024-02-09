@@ -16,22 +16,18 @@ class Creature:
 
   nn = None
 
-  _random = None
 
   def __init__(self, start_pos, screen):
     self.pos = start_pos
     self.nn = neural_net.NeuralNet(self)
-    self._random = random.Random()
 
     self.genome.clear()
-    #for _ in range(self.genome_amount):
-    #  self.genome.append([self._random.uniform(0,1) for _ in range(3)])
 
     for _ in range(self.genome_amount):
       g1 = []
-      g1.append(random.uniform(0,1))
-      g1.append(random.uniform(0,1))
-      g1.append(random.uniform(0,1))
+      g1.append(rand_singleton.RandSingleton()._random.uniform(0,1))
+      g1.append(rand_singleton.RandSingleton()._random.uniform(0,1))
+      g1.append(rand_singleton.RandSingleton()._random.uniform(0,1))
       self.genome.append(g1)
 
     self.set_screen(screen)
@@ -97,7 +93,7 @@ class Creature:
     self.genome.clear()
 
     for _ in range(self.genome_amount):
-      self.genome.append([self._random.uniform(0, 1) for _ in range(3)])
+      self.genome.append([rand_singleton.RandSingleton()._random.uniform(0, 1) for _ in range(3)])
 
 
 

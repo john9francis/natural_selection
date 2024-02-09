@@ -1,5 +1,6 @@
 import pygame
-import random
+from src import rand_singleton
+
 
 class NeuralNet:
   creature = None
@@ -79,10 +80,10 @@ class NeuralNet:
 
   def update(self, dt):
     # get a random genome
-    g = random.choice(self.creature.get_genomes())
+    g = rand_singleton.RandSingleton()._random.choice(self.creature.get_genomes())
 
     # only continue if the weight is bigger than our random val
-    if g[2] > random.uniform(0,1):
+    if g[2] > rand_singleton.RandSingleton()._random.uniform(0,1):
 
       # get the indices by turning the floats into ints.
       input_indx = round(g[0] * len(self.inputs) - 1)
