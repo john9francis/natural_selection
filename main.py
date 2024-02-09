@@ -14,7 +14,7 @@ def main():
   running = True
 
   # init creature list
-  c_list = creature_list.CreatureList(100, screen)
+  c_list = creature_list.CreatureList(10, screen)
   c_list.initialize_creature_list()
 
 
@@ -46,10 +46,10 @@ def main():
 
     repopulate = False
 
-    for c in c_list._creature_list:
-      if player.check_if_in_hitbox(c.pos):
-        c.remove_self_from_list(c_list._creature_list)
-        repopulate = True
+    #for c in c_list._creature_list:
+    #  if player.check_if_in_hitbox(c.pos):
+    #    c.remove_self_from_list(c_list._creature_list)
+    #    repopulate = True
 
     # repopulate any creatures that may have died
     if repopulate:
@@ -63,12 +63,12 @@ def main():
 
 
   # debug print
-  for c in c_list._creature_list:
-    print(c.get_genomes())
+  #for c in c_list._creature_list:
+  #  print(c.get_genomes())
 
   # kill weak creatures and reset
   c_list.kill_some_creatures()
-  c_list.save_and_reset()
+  #c_list.save_and_reset()
   
 
   print("Quitting...")

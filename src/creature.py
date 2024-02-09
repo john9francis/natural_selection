@@ -11,7 +11,7 @@ class Creature:
   size = pygame.Vector2(5, 5)
   speed = 100
 
-  genome_amount = 10
+  genome_amount = 2
   genome = []
 
   nn = None
@@ -88,12 +88,18 @@ class Creature:
     self._screen = screen
     pass
 
+  # BUGGED FUNCTION, BUT WHY??? I DON"T SEE A DIFFERENCE
+  #def set_random_genomes(self):
+  #  self.genome.clear()
 
+  #  for _ in range(self.genome_amount):
+  #    self.genome.append([rand_singleton.RandSingleton()._random.uniform(0, 1) for _ in range(3)])
+
+
+  # FIXED FUNCTION:
   def set_random_genomes(self):
-    self.genome.clear()
-
-    for _ in range(self.genome_amount):
-      self.genome.append([rand_singleton.RandSingleton()._random.uniform(0, 1) for _ in range(3)])
+    # Create a new random list for each creature
+    self.genome = [[rand_singleton.RandSingleton()._random.uniform(0, 1) for _ in range(3)] for _ in range(self.genome_amount)]
 
 
 
