@@ -6,26 +6,17 @@ from . import rand_singleton
 
 class Creature:
 
-  # APPARENTLY THESE ATTRIBUTES HERE ARE
-  # SHARED BY ANY INSTANCE OF THIS CLASS......
-
-  _screen = None
-
-  pos = pygame.Vector2(500, 50)
-  size = pygame.Vector2(5, 5)
-  speed = 100
-
-  genome_amount = 2
-  genome = []
-
-  nn = None
-
 
   def __init__(self, start_pos, screen):
+    
+    self._screen = None
+    self.size = pygame.Vector2(5, 5)
+    self.speed = 100
+    self.genome_amount = 2
+    self.genome = []
     self.pos = start_pos
     self.nn = neural_net.NeuralNet(self)
-
-    self.genome.clear()
+    self._screen = screen
 
     for _ in range(self.genome_amount):
       g1 = []
@@ -34,7 +25,6 @@ class Creature:
       g1.append(rand_singleton.RandSingleton()._random.uniform(0,1))
       self.genome.append(g1)
 
-    self.set_screen(screen)
 
     
 

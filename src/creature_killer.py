@@ -1,5 +1,4 @@
 class CreatureKiller:
-  screen = None
 
   def __init__(self, screen) -> None:
     self.screen = screen

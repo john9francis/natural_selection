@@ -11,16 +11,13 @@ from src import rand_singleton
 
 class CreatureList:
 
-  _creature_list = []
-  _creature_amount = 0
-  _save_manager = None
-  _screen = None
-  dt = 0
-
   def __init__(self, creature_amount, screen) -> None:
     self._save_manager = save_manager.SaveManager()
     self._creature_amount = creature_amount
     self._screen = screen
+
+    self._creature_list = []
+    self.dt = 0
     pass
 
 
@@ -155,10 +152,11 @@ class CreatureList:
   def runtime_repopulate_creatures(self):
     new_creatures = self.repopulate_creatures()
 
-    # mutate ONLY from the new creatures
-    for _ in range(5):
-      rand_singleton.RandSingleton()._random.choice(new_creatures).mutate()
-    
+    # very small chance to mutate a creature
+    value = rand_singleton.RandSingleton()._random.random()
+    if value > .9:
+      new_creatures[0].mutate()
+
     # add the new ones onto the total creatures
     self._creature_list.extend(new_creatures)
   

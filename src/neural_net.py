@@ -3,17 +3,29 @@ from src import rand_singleton
 
 
 class NeuralNet:
-  creature = None
-  genomes = []
 
+  def __init__(self, creature) -> None:
+    self.creature = creature
+    self.genomes = []
+
+    # init our inputs and outputs lists
+    self.inputs = [
+      self.periodic_activation
+      ]
+    
+    self.outputs = [
+      self.move_down,
+      self.move_up,
+      self.move_left,
+      self.move_right
+      ]
+    
+    self.start_time = 0
+    self.time_interval = 200
   
   # =======================================================================
   # Inputs functions
   # =======================================================================
-
-  start_time = 0
-  start_time = pygame.time.get_ticks()
-  time_interval = 200
 
   def periodic_activation(self) -> bool:
     # Calculate elapsed time
@@ -27,8 +39,6 @@ class NeuralNet:
     else:
       return False
     
-  
-  inputs = []
 
   # =======================================================================
   # Outputs functions
@@ -46,35 +56,11 @@ class NeuralNet:
   def move_down(self):
     self.creature.pos.y += 10
 
-
-  outputs = []
-
-
   # =================================================================
 
 
-  def __init__(self, creature) -> None:
-    self.creature = creature
 
-    # init our inputs and outputs lists
-    self.inputs = [
-      self.periodic_activation
-      ]
-    
-    self.outputs = [
-      self.move_down,
-      self.move_up,
-      self.move_left,
-      self.move_right
-      ]
-    
-    # randomize the list to remove bias
-    # NOTE: This is actually wrong... because it would ruin the genome
-    #random.shuffle(self.inputs)
-    #random.shuffle(self.outputs)
-    # There needs to be a different way to remove the bias
 
-    pass
 
 
 

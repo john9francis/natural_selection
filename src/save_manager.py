@@ -1,12 +1,11 @@
 import json
 
 class SaveManager:
-  creature_dict = {}
-  path = "runs/"
-  filename = path + "run1.json"
 
   def __init__(self):
     self.creature_dict = {}
+    self.path = "runs/"
+    self.filename = self.path + "run1.json"
     pass
 
   def populate_creature_dict(self, creature_list):

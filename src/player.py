@@ -5,14 +5,11 @@ class Player:
   WASD controlled player
   '''
 
-  pos = pygame.Vector2()
-  size = pygame.Vector2(50, 50)
-  speed = 300
-  screen = None
-
   def __init__(self, _screen):
     self.screen = _screen
     self.pos = pygame.Vector2(self.screen.get_width() / 2, self.screen.get_height() / 2)
+    self.size = pygame.Vector2(50, 50)
+    self.speed = 300
     pass
 
   def update(self, dt):
