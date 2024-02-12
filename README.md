@@ -4,6 +4,7 @@ This project is a simulation of natural selection, inspired by [biosim4 by david
 
 The long term goal of this project is to program the creatures with reinforcement learning neural networks. 
 
+
 # Development environment
 This project is coded in python, with the following libraries:
 
