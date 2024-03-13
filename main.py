@@ -48,18 +48,11 @@ def main():
     # NOTE: this is not good to affect the creature list
     # directly, but it was an easy way to do it
 
-
     for c in c_list._creature_list:
       if player.check_if_in_hitbox(c.pos):
         c.remove_self_from_list(c_list._creature_list)
 
-    # repopulate creatures every once in awhile
-    #time += dt
-    #if time > repopulation_period:
-    #  c_list.runtime_repopulate_creatures()
-    #  time = 0.
-
-    # if the creature list gets too low, repopulate
+    # repopulate for all the creatures that were eaten
     c_list.runtime_repopulate_creatures()
 
     # update the screen
@@ -67,15 +60,6 @@ def main():
 
     # end game loop
 
-
-  # debug print
-  #for c in c_list._creature_list:
-  #  print(c.get_genomes())
-
-  # kill weak creatures and reset
-  #c_list.kill_some_creatures()
-  #c_list.save_and_reset()
-  
 
   print("Quitting...")
   pygame.quit()
