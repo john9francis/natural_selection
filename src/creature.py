@@ -1,5 +1,6 @@
 import pygame
 import random
+import copy
 
 from . import neural_net
 
@@ -105,7 +106,8 @@ class Creature:
 
 
   def get_genomes(self):
-    return self.genome
+    genome_copy = copy.deepcopy(self.genome)
+    return genome_copy
   
   """
   def get_raw_genome_list(self):

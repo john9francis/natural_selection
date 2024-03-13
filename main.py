@@ -23,7 +23,7 @@ def main():
 
   # start a variable to keep track of time
   time = 0.
-  repopulation_period = 5 # seconds
+  repopulation_period = 3 # seconds
 
   while running:
     # allow to quit

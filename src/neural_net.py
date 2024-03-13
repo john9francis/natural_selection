@@ -23,7 +23,7 @@ class NeuralNet:
       ]
     
     self.start_time = 0
-    self.time_interval = 200
+    self.time_interval = 50
   
   # =======================================================================
   # Inputs functions
@@ -34,7 +34,7 @@ class NeuralNet:
     current_time = pygame.time.get_ticks()
     elapsed_time = current_time - self.start_time
 
-    # Check if 2 seconds have passed
+    # Check if time interval has passed
     if elapsed_time >= self.time_interval:
       self.start_time = current_time
       return True

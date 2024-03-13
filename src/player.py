@@ -8,8 +8,8 @@ class Player:
   def __init__(self, _screen):
     self.screen = _screen
     self.pos = pygame.Vector2(self.screen.get_width() / 2, self.screen.get_height() / 2)
-    self.size = pygame.Vector2(50, 50)
-    self.speed = 300
+    self.size = pygame.Vector2(150, 150)
+    self.speed = 600
     pass
 
   def update(self, dt):
@@ -17,13 +17,13 @@ class Player:
     # make the player move
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
-      self.pos.y -= 300 * dt
+      self.pos.y -= self.speed * dt
     if keys[pygame.K_s]:
-      self.pos.y += 300 * dt
+      self.pos.y += self.speed * dt
     if keys[pygame.K_a]:
-      self.pos.x -= 300 * dt
+      self.pos.x -= self.speed * dt
     if keys[pygame.K_d]:
-      self.pos.x += 300 * dt
+      self.pos.x += self.speed * dt
 
     # keep player on the screen
     if self.pos.x > self.screen.get_width() - self.size.x:
