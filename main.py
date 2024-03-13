@@ -15,15 +15,10 @@ def main():
 
   # init creature list
   c_list = creature_list.CreatureList(100, screen)
-  c_list.initialize_creature_list()
 
 
   # initialize a player
   player = p.Player(screen)
-
-  # start a variable to keep track of time
-  time = 0.
-  repopulation_period = 3. # seconds
 
   while running:
     # allow to quit

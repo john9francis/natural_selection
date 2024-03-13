@@ -18,10 +18,12 @@ class CreatureList:
     self._creature_list = []
 
     self.rand = random.Random()
+
+    self.__initialize_creature_list()
     pass
 
 
-  def initialize_creature_list(self):
+  def __initialize_creature_list(self):
     '''
     First, tries to load creatures from file
     and loads any remaining creatures by duplicating
@@ -35,25 +37,25 @@ class CreatureList:
 
       if len(creature_dict) > 0:
         print("loading from file")
-        self._creature_list = self.create_creatures_from_dict(creature_dict)
+        self._creature_list = self.__create_creatures_from_dict(creature_dict)
       else:
         raise FileNotFoundError
 
     except FileNotFoundError:
       print("Creating random creatures")
-      self._creature_list = self.create_random_creatures(self._creature_amount)
+      self._creature_list = self.__create_random_creatures(self._creature_amount)
       pass
 
 
     if len(self._creature_list) < self._creature_amount:
       print("Repopulating from survivors")
-      repopulated_creatures = self.repopulate_creatures()
+      repopulated_creatures = self.__repopulate_creatures()
       self._creature_list.extend(repopulated_creatures)
       pass
 
 
     # mutate some
-    self.mutate_creatures()
+    self.__mutate_creatures()
 
 
   def update(self, dt):
@@ -88,23 +90,14 @@ class CreatureList:
   # Specific creature generation functions
   # ________________________________________________
 
-  def mutate_creatures(self, how_many=5):
-    # Mutate a few
-    for _ in range(how_many):
-      self.rand.choice(self._creature_list).mutate()
-
-
-  def kill_some_creatures(self):
-    '''
-    Temporary function to kill some creatures off
-    '''
-    # kill the weak creatures
-    killer = creature_killer.CreatureKiller(self._screen)
-    self._creature_list = killer.kill_creatures_on_right(self._creature_list)
+  def __mutate_creatures(self, how_many=5):
+   # Mutate a few
+   for _ in range(how_many):
+     self.rand.choice(self._creature_list).mutate()
 
 
   
-  def create_creatures_from_dict(self, _creature_dict) -> list:
+  def __create_creatures_from_dict(self, _creature_dict) -> list:
     new_creature_list = []
 
     for key in _creature_dict:
@@ -130,7 +123,7 @@ class CreatureList:
     return new_creature_list
 
 
-  def create_random_creatures(self, _creature_amount) -> list:
+  def __create_random_creatures(self, _creature_amount) -> list:
     new_creature_list = []
 
     for _ in range(_creature_amount):
@@ -150,7 +143,7 @@ class CreatureList:
   
 
   def runtime_repopulate_creatures(self):
-    new_creatures = self.repopulate_creatures()
+    new_creatures = self.__repopulate_creatures()
 
     # very small chance to mutate a creature
     for i in range(len(new_creatures)):
@@ -162,7 +155,7 @@ class CreatureList:
     self._creature_list.extend(new_creatures)
   
 
-  def repopulate_creatures(self, creature_amount=0) -> list:
+  def __repopulate_creatures(self, creature_amount=0) -> list:
     '''
     Repopulates creatures by duplicating genomes from the
     already existing creatures. default behavior is to 
