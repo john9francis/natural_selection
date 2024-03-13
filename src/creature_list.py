@@ -7,7 +7,6 @@ import random
 from src import creature
 from src import save_manager
 from src import creature_killer
-from src import rand_singleton
 
 class CreatureList:
 
@@ -18,6 +17,8 @@ class CreatureList:
 
     self._creature_list = []
     self.dt = 0
+
+    self.rand = random.Random()
     pass
 
 
@@ -91,7 +92,7 @@ class CreatureList:
   def mutate_creatures(self, how_many=5):
     # Mutate a few
     for _ in range(how_many):
-      rand_singleton.RandSingleton()._random.choice(self._creature_list).mutate()
+      self.rand.choice(self._creature_list).mutate()
 
 
   def kill_some_creatures(self):
@@ -110,8 +111,8 @@ class CreatureList:
     for key in _creature_dict:
       c = creature.Creature(
         pygame.Vector2(
-          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_width(),
-          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_height()
+          self.rand.uniform(0,1) * self._screen.get_width(),
+          self.rand.uniform(0,1) * self._screen.get_height()
         ),
         self._screen,
       )
@@ -136,8 +137,8 @@ class CreatureList:
     for _ in range(_creature_amount):
       c = creature.Creature(
         pygame.Vector2(
-          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_width(),
-          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_height()
+          self.rand.uniform(0,1) * self._screen.get_width(),
+          self.rand.uniform(0,1) * self._screen.get_height()
         ),
         self._screen,
       )
@@ -153,9 +154,10 @@ class CreatureList:
     new_creatures = self.repopulate_creatures()
 
     # very small chance to mutate a creature
-    value = rand_singleton.RandSingleton()._random.random()
-    if value > .9:
-      new_creatures[0].mutate()
+    for i in range(len(new_creatures)):
+      value = self.rand.random()
+      if value > .7:
+        new_creatures[i].mutate()
 
     # add the new ones onto the total creatures
     self._creature_list.extend(new_creatures)
@@ -177,13 +179,13 @@ class CreatureList:
     for _ in range(creature_amount):
       c = creature.Creature(
         pygame.Vector2(
-          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_width(),
-          rand_singleton.RandSingleton()._random.uniform(0,1) * self._screen.get_height()
+          self.rand.uniform(0,1) * self._screen.get_width(),
+          self.rand.uniform(0,1) * self._screen.get_height()
         ),
         self._screen,
       )
 
-      parent = rand_singleton.RandSingleton()._random.choice(self._creature_list)
+      parent = self.rand.choice(self._creature_list)
       c.set_genomes(parent.get_genomes())
 
       new_creatures.append(c)

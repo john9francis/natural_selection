@@ -2,7 +2,6 @@ import pygame
 import random
 
 from . import neural_net
-from . import rand_singleton
 
 class Creature:
 
@@ -18,11 +17,13 @@ class Creature:
     self.nn = neural_net.NeuralNet(self)
     self._screen = screen
 
+    self.rand = random.Random()
+  
     for _ in range(self.genome_amount):
       g1 = []
-      g1.append(rand_singleton.RandSingleton()._random.uniform(0,1))
-      g1.append(rand_singleton.RandSingleton()._random.uniform(0,1))
-      g1.append(rand_singleton.RandSingleton()._random.uniform(0,1))
+      g1.append(self.rand.random())
+      g1.append(self.rand.random())
+      g1.append(self.rand.random())
       self.genome.append(g1)
 
 
@@ -51,12 +52,10 @@ class Creature:
   def mutate(self):
     # change one random value in the genome
 
-    # access random singleton
-    rand = rand_singleton.RandSingleton()
 
-    indx1 = rand._random.randint(0, len(self.genome)-1)
-    indx2 = rand._random.randint(0,2)
-    self.genome[indx1][indx2] = rand._random.uniform(0,1)
+    indx1 = self.rand.randint(0, len(self.genome)-1)
+    indx2 = self.rand.randint(0,2)
+    self.genome[indx1][indx2] = self.rand.uniform(0,1)
     pass
 
 
@@ -93,7 +92,7 @@ class Creature:
   # FIXED FUNCTION:
   def set_random_genomes(self):
     # Create a new random list for each creature
-    self.genome = [[rand_singleton.RandSingleton()._random.uniform(0, 1) for _ in range(3)] for _ in range(self.genome_amount)]
+    self.genome = [[self.rand.uniform(0, 1) for _ in range(3)] for _ in range(self.genome_amount)]
 
 
 
