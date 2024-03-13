@@ -53,10 +53,13 @@ def main():
         c.remove_self_from_list(c_list._creature_list)
 
     # repopulate creatures every once in awhile
-    time += dt
-    if time > repopulation_period:
-      c_list.runtime_repopulate_creatures()
-      time = 0.
+    #time += dt
+    #if time > repopulation_period:
+    #  c_list.runtime_repopulate_creatures()
+    #  time = 0.
+
+    # if the creature list gets too low, repopulate
+    c_list.runtime_repopulate_creatures()
 
     # update the screen
     pygame.display.flip()
