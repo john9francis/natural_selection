@@ -16,7 +16,6 @@ class CreatureList:
     self._screen = screen
 
     self._creature_list = []
-    self.dt = 0
 
     self.rand = random.Random()
     pass
@@ -62,7 +61,7 @@ class CreatureList:
     Updates and draws all the creatures
     '''
     for c in self._creature_list:
-      c.update(self.dt)
+      c.update(dt)
       c.draw(self._screen)
 
 

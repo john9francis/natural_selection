@@ -19,6 +19,9 @@ class Creature:
     self._screen = screen
 
     self.rand = random.Random()
+
+    self.time = 0.
+    self.respawn_time = 5.
   
     for _ in range(self.genome_amount):
       g1 = []
@@ -33,6 +36,22 @@ class Creature:
   def update(self, dt):
     self.nn.update(dt)
     self.stay_on_screen()
+
+    # after a period of time, respawn in a random location
+    self.time += dt
+
+    # if self.time > self.respawn_time:
+    #   self.set_pos_to_random()
+    #   self.time = 0.
+
+
+  def set_pos_to_random(self):
+    '''sets creatures position to a random place'''
+    self.pos = pygame.Vector2(
+      self.rand.uniform(0, 1) * self._screen.get_width(), 
+      self.rand.uniform(0, 1) * self._screen.get_height())
+    
+
 
 
   def draw(self, screen):

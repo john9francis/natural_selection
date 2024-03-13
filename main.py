@@ -10,7 +10,7 @@ def main():
   screen = pygame.display.set_mode((1280, 720))
   clock = pygame.time.Clock()
 
-  dt = 0
+  dt = 0.
   running = True
 
   # init creature list
@@ -23,7 +23,7 @@ def main():
 
   # start a variable to keep track of time
   time = 0.
-  repopulation_period = 3 # seconds
+  repopulation_period = 3. # seconds
 
   while running:
     # allow to quit
@@ -34,6 +34,7 @@ def main():
     # re-draw the background each frame so we don't get previous frames showing up
     screen.fill("black")
 
+    dt = clock.tick(60) / 1000.0
 
     # update our creatures
     c_list.update(dt)
@@ -63,7 +64,6 @@ def main():
 
     # update the screen
     pygame.display.flip()
-    dt = clock.tick(60) / 1000
 
     # end game loop
 
