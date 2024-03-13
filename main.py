@@ -21,6 +21,9 @@ def main():
   # initialize a player
   player = p.Player(screen)
 
+  # start a variable to keep track of time
+  time = 0.
+  repopulation_period = 5 # seconds
 
   while running:
     # allow to quit
@@ -44,16 +47,16 @@ def main():
     # NOTE: this is not good to affect the creature list
     # directly, but it was an easy way to do it
 
-    repopulate = False
 
     for c in c_list._creature_list:
       if player.check_if_in_hitbox(c.pos):
         c.remove_self_from_list(c_list._creature_list)
-        repopulate = True
 
-    # repopulate any creatures that may have died
-    if repopulate:
+    # repopulate creatures every once in awhile
+    time += dt
+    if time > repopulation_period:
       c_list.runtime_repopulate_creatures()
+      time = 0.
 
     # update the screen
     pygame.display.flip()
