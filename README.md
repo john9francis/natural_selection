@@ -1,3 +1,7 @@
+# REL v020
+
+Creatures evolve and work with an arbitrary amount of input and output functions. Next step is abstracting everything and making it private, then exposing a developer interface.
+
 # Overview
 
 This project is a simulation of natural selection, inspired by [biosim4 by davidrmiller](https://github.com/davidrmiller/biosim4)
