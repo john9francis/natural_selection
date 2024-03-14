@@ -63,9 +63,6 @@ class NeuralNet:
 
 
 
-
-
-
   def update(self, dt):
     # get a random genome
     g = self.rand.choice(self.creature.get_genomes())

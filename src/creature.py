@@ -20,8 +20,6 @@ class Creature:
 
     self.rand = random.Random()
 
-    self.time = 0.
-    self.respawn_time = 5.
   
     for _ in range(self.genome_amount):
       g1 = []
@@ -30,19 +28,11 @@ class Creature:
       g1.append(self.rand.random())
       self.genome.append(g1)
 
-
     
 
   def update(self, dt):
     self.nn.update(dt)
     self.stay_on_screen()
-
-    # after a period of time, respawn in a random location
-    self.time += dt
-
-    # if self.time > self.respawn_time:
-    #   self.set_pos_to_random()
-    #   self.time = 0.
 
 
   def set_pos_to_random(self):
@@ -71,8 +61,6 @@ class Creature:
 
   def mutate(self):
     # change one random value in the genome
-
-
     indx1 = self.rand.randint(0, len(self.genome)-1)
     indx2 = self.rand.randint(0,2)
     self.genome[indx1][indx2] = self.rand.uniform(0,1)
@@ -83,6 +71,7 @@ class Creature:
     if self in list_to_leave:
       list_to_leave.remove(self)
     pass
+
 
   def stay_on_screen(self):
     if self._screen != None:
@@ -101,15 +90,7 @@ class Creature:
     self._screen = screen
     pass
 
-  # BUGGED FUNCTION, BUT WHY??? I DON"T SEE A DIFFERENCE
-  #def set_random_genomes(self):
-  #  self.genome.clear()
 
-  #  for _ in range(self.genome_amount):
-  #    self.genome.append([rand_singleton.RandSingleton()._random.uniform(0, 1) for _ in range(3)])
-
-
-  # FIXED FUNCTION:
   def set_random_genomes(self):
     # Create a new random list for each creature
     self.genome = [[self.rand.uniform(0, 1) for _ in range(3)] for _ in range(self.genome_amount)]
@@ -128,22 +109,3 @@ class Creature:
     genome_copy = copy.deepcopy(self.genome)
     return genome_copy
   
-  """
-  def get_raw_genome_list(self):
-    '''returns just a list of lists so it can be json serializable'''
-    raw_list = []
-    # get the genome data list
-    for g in self.nn.get_genome_list():
-      raw_list.append(g.get_genome())
-
-    return raw_list
-  
-
-  def set_raw_genome_list(self, raw_g_list):
-    ''' populates the genomes off of a plain list of lists'''
-    for i in raw_g_list:
-      g = genome.Genome()
-      g.set_genome(i)
-
-      self.nn.add_genome(g)
-  """
