@@ -4,9 +4,9 @@
 import pygame
 import random
 
-from src import creature
-from src import save_manager
-from src import creature_killer
+import creature
+import save_manager
+import creature_killer
 
 class CreatureList:
 

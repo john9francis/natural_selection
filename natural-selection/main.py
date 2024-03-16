@@ -1,6 +1,6 @@
 import pygame
-from src import creature_list
-from src import player as p
+import creature_list
+import player as p
 
 
 def main():
@@ -14,7 +14,7 @@ def main():
   running = True
 
   # init creature list
-  c_list = creature_list.CreatureList(100, screen)
+  c_list = creature_list.CreatureList(500, screen)
 
 
   # initialize a player
