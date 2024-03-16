@@ -4,8 +4,8 @@
 import pygame
 import random
 
-from natural_selection.src import creature
-from natural_selection.src import save_manager
+from . import creature
+from . import save_manager
 
 class CreatureList:
 
