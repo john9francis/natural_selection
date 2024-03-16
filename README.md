@@ -9,7 +9,6 @@ The long term goal of this project is to program the creatures with reinforcemen
 This project is coded in python, with the following libraries:
 
 1. [pygame](https://www.pygame.org/news)
-2. random
 
 # Creating an executable
 To convert this project into an executable, follow these steps: 
