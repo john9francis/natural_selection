@@ -1,6 +1,6 @@
 import pygame
-import creature_list
-import player as p
+from natural_selection.src import creature_list as cl
+from natural_selection.src import player as p
 
 
 def main():
@@ -14,7 +14,7 @@ def main():
   running = True
 
   # init creature list
-  c_list = creature_list.CreatureList(500, screen)
+  c_list = cl.CreatureList(500, screen)
 
 
   # initialize a player

@@ -2,7 +2,7 @@ import pygame
 import random
 import copy
 
-import neural_net
+from natural_selection.src import neural_net
 
 class Creature:
 
