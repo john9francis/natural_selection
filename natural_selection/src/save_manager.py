@@ -8,6 +8,13 @@ class SaveManager:
     self.filename = self.path + "run1.json"
     pass
 
+
+  def save_creatures(self, creature_list):
+    self.populate_creature_dict(creature_list)
+    self.clear_file()
+    self.save()
+
+
   def populate_creature_dict(self, creature_list):
     # first, clear out creature dict
     self.creature_dict.clear()

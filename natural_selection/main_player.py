@@ -16,7 +16,6 @@ def main():
   # init creature list
   c_list = cl.CreatureList(500, screen)
 
-
   # initialize a player
   player = p.Player(screen)
 
@@ -54,7 +53,6 @@ def main():
     pygame.display.flip()
 
     # end game loop
-
 
   print("Quitting...")
   pygame.quit()
